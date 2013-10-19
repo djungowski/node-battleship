@@ -1,0 +1,25 @@
+body {
+    background-color: #efefef;
+    font-family: helvetica;
+}
+
+#content {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.player {
+    width: 49%;
+    float: left;
+}
+
+.player:last-child {
+    float: right
+}
+
+.player p {
+    text-align: center;
+    background-color: #369;
+    color: #fff;
+    padding: 6px;
+}
