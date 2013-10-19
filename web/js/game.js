@@ -4,6 +4,12 @@
         this.initPlayingField();
     };
 
+    Game.prototype.state = 'preparation';
+
+    Game.prototype.setState = function(state) {
+        this.state = state;
+    }
+
     Game.prototype.initNameForm = function() {
         nameForm = $('#enter-player-name');
         // Spielername als Modal anzeigen

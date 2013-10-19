@@ -20,6 +20,21 @@ html, body {
     padding: 6px;
 }
 
+.player .field {
+    position: relative;
+}
+
+.player .interaction-blocked {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.1;
+    background-color: #ffffff;
+}
+
 .player.opponent {
     float: right
 }
