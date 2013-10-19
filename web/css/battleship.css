@@ -32,7 +32,8 @@ html, body {
     left: 0;
     right: 0;
     opacity: 0.1;
-    background-color: #ffffff;
+    background-color: #000000;
+    cursor: not-allowed;
 }
 
 .player.opponent {
@@ -53,7 +54,6 @@ table td {
     text-align: center;
     height: 20px;
     color: #369;
-    cursor: not-allowed;
 }
 
 table td.used {

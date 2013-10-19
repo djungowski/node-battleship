@@ -31,8 +31,15 @@
     };
 
     Game.prototype.initPlayingField = function() {
+        var opponent = $('.player.opponent');
+
+        // Am Anfang ist das rechte Spielfeld geblockt
+        // Das rechte Spielfeld wird erst entblockt, wenn alle Spieler ihre Schiffe platziert
+        // haben und wenn der User an der Reihe ist
+        opponent.find('.interaction-blocked').show();
+
         // Klick auf das rechte Spielfeld
-        $('.player.opponent table').on('click', function(event) {
+        opponent.find('table').on('click', function(event) {
             field = $(event.target);
             if (!field.hasClass('used')) {
                 // Hier fehlt noch die Serverinteraktion
