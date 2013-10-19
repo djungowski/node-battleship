@@ -3,15 +3,33 @@
 <head>
     <title>Schiffe versenken</title>
     <link rel="stylesheet" type="text/css" href="css/battleship.css">
+    <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript">
+        window.field = {
+            rows: 20,
+            cols: 20
+        }
+    </script>
 </head>
 <body>
-    <div id="content">
-        <div class="player">
-            <p>Du</p>
-        </div>
-        <div class="player">
-            <p>Dein Gegenspieler</p>
-        </div>
+<div id="content">
+    <div class="player">
+        <p>Du</p>
+        <table></table>
     </div>
+    <div class="player">
+        <p>Dein Gegenspieler</p>
+        <table></table>
+    </div>
+</div>
+
+<footer>
+    An der Reihe:
+    <span id="whose-turn-is-it"></span>
+</footer>
+
+<script type="text/javascript" src="js/playing-field.js"></script>
+
 </body>
 </html>

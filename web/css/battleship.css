@@ -1,11 +1,11 @@
-body {
+html, body {
     background-color: #efefef;
-    font-family: helvetica;
+    font-family: helvetica, sans-serif;
 }
 
 #content {
     overflow: hidden;
-    margin: 0 auto;
+    height: 100%;
 }
 
 .player {
@@ -13,13 +13,46 @@ body {
     float: left;
 }
 
-.player:last-child {
-    float: right
-}
-
 .player p {
     text-align: center;
     background-color: #369;
     color: #fff;
     padding: 6px;
+}
+
+.player:last-child {
+    float: right
+}
+
+.player:last-child p {
+    background-color: #AA0000;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+table td {
+    border: 1px solid #369;
+    text-align: center;
+    height: 20px;
+    color: #369;
+}
+
+.player:last-child table td {
+    border-color: #AA0000;
+    color: #AA0000;
+}
+
+footer {
+    position: fixed;
+    border-top: 1px solid #000000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    height: 30px;
+    background-color: #3AAC4C;
+    color: #ffffff;
 }
