@@ -1,7 +1,13 @@
 (function() {
     nameForm = $('#enter-player-name');
     // Spielername als Modal anzeigen
-    nameForm.easyModal();
+    nameForm.easyModal({
+        closeOnEscape: false,
+        overlayClose: false,
+        onOpen: function() {
+            nameForm.find('input').focus();
+        }
+    });
     nameForm.trigger('openModal');
     nameForm.on('submit', function(event) {
         event.preventDefault();
