@@ -1,10 +1,7 @@
 (function() {
-    var fieldRows = 20;
-    var fieldCols = 20;
-
     createRows = function() {
         rows = [];
-        for(rowsCreated = 1; rowsCreated <= fieldRows; rowsCreated++) {
+        for(rowsCreated = 1; rowsCreated <= window.field.rows; rowsCreated++) {
             currentRow = $('<tr></tr>');
             currentRow.append(createCols(rowsCreated))
             rows.push(currentRow)
@@ -14,7 +11,7 @@
 
     createCols = function(currentRow) {
         cols = [];
-        for(colsCreated = 1; colsCreated <= fieldCols; colsCreated++) {
+        for(colsCreated = 1; colsCreated <= window.field.cols; colsCreated++) {
             cols.push($('<td>' + currentRow + '</td>'))
         }
         return cols;

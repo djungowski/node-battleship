@@ -13,10 +13,6 @@ html, body {
     float: left;
 }
 
-.player:last-child {
-    float: right
-}
-
 .player p {
     text-align: center;
     background-color: #369;
@@ -24,12 +20,26 @@ html, body {
     padding: 6px;
 }
 
+.player:last-child {
+    float: right
+}
+
+.player:last-child p {
+    background-color: #AA0000;
+}
+
 table {
     width: 100%;
 }
 
 table td {
-    border: 1px solid #000000;
+    border: 1px solid #369;
     text-align: center;
     height: 20px;
+    color: #369;
+}
+
+.player:last-child table td {
+    border-color: #AA0000;
+    color: #AA0000;
 }
