@@ -46,6 +46,8 @@
             opponentBlock.show();
             youBlock.show();
         }
+
+        $('#whose-turn-is-it').html(this.players[this.activePlayer].name);
     };
 
     Game.prototype.initNameForm = function() {
@@ -59,12 +61,17 @@
             }
         });
         nameForm.trigger('openModal');
+
+        var me = this;
         nameForm.on('submit', function(event) {
             event.preventDefault();
 
             // Hier fehlt noch die Serverinteraktion
+            var yourName = $('#player-name').val();
             nameForm.trigger('closeModal');
-            $('.player.you .player-name').html($('#player-name').val())
+            me.players.you.name = yourName;
+            me.players.you.id = ''; // Kommt vom Server!
+            $('.player.you .player-name').html(yourName)
         });
     };
 
