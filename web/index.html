@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/battleship.css">
     <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyModal.js"></script>
     <script type="text/javascript">
         window.field = {
             rows: 20,
@@ -13,13 +14,18 @@
     </script>
 </head>
 <body>
+<form id="enter-player-name">
+    <label for="player-name">Dein Name:</label>
+    <input type="text" name="player-name" id="player-name">
+</form>
+
 <div id="content">
-    <div class="player">
-        <p>Du</p>
+    <div class="player you">
+        <p class="player-name">Du</p>
         <table></table>
     </div>
-    <div class="player">
-        <p>Dein Gegenspieler</p>
+    <div class="player opponent">
+        <p class="player-name">Dein Gegenspieler</p>
         <table></table>
     </div>
 </div>

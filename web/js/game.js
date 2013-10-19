@@ -1,6 +1,18 @@
 (function() {
+    nameForm = $('#enter-player-name');
+    // Spielername als Modal anzeigen
+    nameForm.easyModal();
+    nameForm.trigger('openModal');
+    nameForm.on('submit', function(event) {
+        event.preventDefault();
+
+        // Hier fehlt noch die Serverinteraktion
+        nameForm.trigger('closeModal');
+        $('.player.you .player-name').html($('#player-name').val())
+    });
+
     // Klick auf das rechte Spielfeld
-    $('.player:last-child table').on('click', function(event) {
+    $('.player.opponent table').on('click', function(event) {
         field = $(event.target);
         if (!field.hasClass('used')) {
             // Hier fehlt noch die Serverinteraktion
