@@ -38,11 +38,22 @@ table td {
     text-align: center;
     height: 20px;
     color: #369;
+    cursor: not-allowed;
+}
+
+table td.used {
+    background-color: #369;
 }
 
 .player:last-child table td {
     border-color: #AA0000;
     color: #AA0000;
+    cursor: pointer;
+}
+
+.player:last-child table td.used {
+    background-color: #AA0000;
+    cursor: not-allowed;
 }
 
 footer {
