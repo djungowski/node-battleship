@@ -51,7 +51,8 @@ footer {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 50px;
-    background-color: #4f6193;
+    padding: 10px;
+    height: 30px;
+    background-color: #3AAC4C;
     color: #ffffff;
 }
