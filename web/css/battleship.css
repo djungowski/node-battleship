@@ -54,6 +54,7 @@ table td {
     text-align: center;
     height: 20px;
     color: #369;
+    cursor: pointer;
 }
 
 table td.used {
@@ -67,7 +68,6 @@ table td.ship {
 .player.opponent table td {
     border-color: #AA0000;
     color: #AA0000;
-    cursor: pointer;
 }
 
 .player.opponent table td.used {

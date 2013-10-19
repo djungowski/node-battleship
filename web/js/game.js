@@ -6,9 +6,47 @@
 
     Game.prototype.state = 'preparation';
 
+    /**
+     * Der aktuelle Spieler
+     * Kann sein: "you" oder "opponent"
+     *
+     * @type String
+     */
+    Game.prototype.activePlayer = null;
+
+    /**
+     * Alle Spieler der Partie
+     *
+     * @type {{you: {id: null, name: null}, opponent: {id: null, name: null}}}
+     */
+    Game.prototype.players = {
+        you: {
+            id: null,
+            name: null
+        },
+        opponent: {
+            id: null,
+            name: null
+        }
+    };
+
     Game.prototype.setState = function(state) {
         this.state = state;
-    }
+    };
+
+    Game.prototype.setActivePlayer = function(player) {
+        this.activePlayer = player;
+
+        var youBlock = $('.player.you .interaction-blocked');
+        var opponentBlock = $('.player.opponent .interaction-blocked');
+
+        if (player == 'you') {
+            opponentBlock.hide();
+        } else {
+            opponentBlock.show();
+            youBlock.show();
+        }
+    };
 
     Game.prototype.initNameForm = function() {
         nameForm = $('#enter-player-name');
