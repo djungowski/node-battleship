@@ -40,9 +40,17 @@ table td {
     color: #369;
 }
 
+table td.used {
+    background-color: #369;
+}
+
 .player:last-child table td {
     border-color: #AA0000;
     color: #AA0000;
+}
+
+.player:last-child table td.used {
+    background-color: #AA0000;
 }
 
 footer {
