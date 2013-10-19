@@ -12,7 +12,7 @@
     createCols = function(currentRow) {
         cols = [];
         for(colsCreated = 1; colsCreated <= window.field.cols; colsCreated++) {
-            cols.push($('<td>' + currentRow + '</td>'))
+            cols.push($('<td x="' + currentRow + '" y="' + colsCreated + '" title="Zeile ' + currentRow + ' Spalte ' + colsCreated + '"></td>'))
         }
         return cols;
     };
