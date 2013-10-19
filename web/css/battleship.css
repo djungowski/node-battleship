@@ -1,11 +1,11 @@
-body {
+html, body {
     background-color: #efefef;
-    font-family: helvetica;
+    font-family: helvetica, sans-serif;
 }
 
 #content {
     overflow: hidden;
-    margin: 0 auto;
+    height: 100%;
 }
 
 .player {
@@ -22,4 +22,14 @@ body {
     background-color: #369;
     color: #fff;
     padding: 6px;
+}
+
+table {
+    width: 100%;
+}
+
+table td {
+    border: 1px solid #000000;
+    text-align: center;
+    height: 20px;
 }
