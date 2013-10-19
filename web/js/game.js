@@ -1,6 +1,6 @@
 (function() {
     // Klick auf das rechte Spielfeld
-    $('.player:last-child table').on('click', function(event) {
+    $('.player.opponent table').on('click', function(event) {
         field = $(event.target);
         if (!field.hasClass('used')) {
             // Hier fehlt noch die Serverinteraktion

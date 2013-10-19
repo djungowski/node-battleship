@@ -20,11 +20,11 @@ html, body {
     padding: 6px;
 }
 
-.player:last-child {
+.player.opponent {
     float: right
 }
 
-.player:last-child p {
+.player.opponent p {
     background-color: #AA0000;
 }
 
@@ -45,13 +45,17 @@ table td.used {
     background-color: #369;
 }
 
-.player:last-child table td {
+table td.ship {
+    background-color: #919191;
+}
+
+.player.opponent table td {
     border-color: #AA0000;
     color: #AA0000;
     cursor: pointer;
 }
 
-.player:last-child table td.used {
+.player.opponent table td.used {
     background-color: #AA0000;
     cursor: not-allowed;
 }
