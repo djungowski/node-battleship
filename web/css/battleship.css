@@ -30,6 +30,7 @@ html, body {
 
 table {
     width: 100%;
+    margin-bottom: 70px;
 }
 
 table td {
@@ -42,4 +43,15 @@ table td {
 .player:last-child table td {
     border-color: #AA0000;
     color: #AA0000;
+}
+
+footer {
+    position: fixed;
+    border-top: 1px solid #000000;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+    background-color: #4f6193;
+    color: #ffffff;
 }
