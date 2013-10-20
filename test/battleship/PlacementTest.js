@@ -79,12 +79,30 @@ describe("Placement", function(){
 			assert(p1.collidesWith(p2));
 		});
 		
-		it ("should return true when to placements cross each other", function(){
+		it ("should return true when two placements cross each other", function(){
 			var ship1 = new Carrier(), 
 		    	ship2 = new Carrier(),
 		    	p1 = new Placement(ship1, 5, 5, Ship.ORIENTATION_HORIZONTAL),
 		    	p2 = new Placement(ship2, 7, 3, Ship.ORIENTATION_VERTICAL);
 			assert(p1.collidesWith(p2));
+		});
+		
+		it ("should return false on various T-style placements (non-overlapping)", function(){
+			var ship1 = new Carrier(),
+				ship2 = new Carrier(),
+				p = new Placement(ship1, 10, 10, Ship.ORIENTATION_HORIZONTAL);
+			
+			// before & after
+			var p1 = new Placement(ship2, 9, 7, Ship.ORIENTATION_VERTICAL);
+			assert(!p.collidesWith(p1));
+			var p2 = new Placement(ship2, 15, 7, Ship.ORIENTATION_VERTICAL);
+			assert(!p.collidesWith(p2));
+			
+			// above & below
+			var p3 = new Placement(ship2, 7, 5, Ship.ORIENTATION_VERTICAL);
+			assert(!p.collidesWith(p3));
+			var p4 = new Placement(ship2, 7, 11, Ship.ORIENTATION_VERTICAL);
+			assert(!p.collidesWith(p4));
 		});
 	});
 });
