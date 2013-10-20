@@ -49,9 +49,10 @@ wsServer.on('request', function(req) {
 		conn.sendUTF(JSON.stringify({event:"gameStart"}));
 	});
 	
-	['activate', 'deactivate'].forEach(function(event){
+	// relay all important events to the client
+	['activate', 'deactivate', 'opponentNameChanged'].forEach(function(event){
 		iface.on(event, function(){
-			conn.sendUTF(JSON.stringify({event:event}));
+			conn.sendUTF(JSON.stringify({event:event, data:arguments}));
 		});
 	});
 });
