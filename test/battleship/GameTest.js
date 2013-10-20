@@ -4,9 +4,9 @@ describe("Game", function(){
 	describe("#finishPlacement", function(){
 		it ("should emit an event when both players finish their placement", function(done){
 			var game = new Game();
-			game.on("placementDone", done);
-			game.finishPlacment(0);
-			game.finishPlacment(1);
+			game.on("gameStart", done);
+			game.getNextInterface().finishPlacment();
+			game.getNextInterface().finishPlacment();
 		});
 	});
 });
