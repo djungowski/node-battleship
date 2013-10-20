@@ -1,7 +1,7 @@
-var assert = require('assert');
-
-var Placement = require('../../lib/battleship/Placement'),
-	Ship = require('../../lib/battleship/Ship');
+var assert = require('assert'),
+	Placement = require('../../lib/battleship/Placement'),
+	Ship = require('../../lib/battleship/Ship'),
+	Carrier = require('../../lib/battleship/ships/Carrier');
 
 describe("Placement", function(){
 	describe('#contains', function(){
@@ -43,6 +43,48 @@ describe("Placement", function(){
 			assert(p.contains(5, 5));
 			assert(p.contains(5, 6));
 			assert(p.contains(5, 7));
+		});
+	});
+	
+	describe('#collidesWith', function(){
+		it("should return false on two parallel, touching placements", function(){
+			var ship1 = new Carrier(), 
+			    ship2 = new Carrier(),
+			    p1 = new Placement(ship1, 5, 5, Ship.ORIENTATION_HORIZONTAL),
+				p2 = new Placement(ship2, 5, 6, Ship.ORIENTATION_HORIZONTAL);
+			assert(!p1.collidesWith(p2));
+		});
+		
+		it("should return true on to identical placements", function(){
+			var ship1 = new Carrier(), 
+			    ship2 = new Carrier(),
+			    p1 = new Placement(ship1, 5, 5, Ship.ORIENTATION_HORIZONTAL),
+				p2 = new Placement(ship2, 5, 5, Ship.ORIENTATION_HORIZONTAL);
+			assert(p1.collidesWith(p2));
+		});
+		
+		it ("should return false on two placements behind each other", function(){
+			var ship1 = new Carrier(), 
+			    ship2 = new Carrier(),
+			    p1 = new Placement(ship1, 5, 5, Ship.ORIENTATION_HORIZONTAL),
+				p2 = new Placement(ship2, 10, 5, Ship.ORIENTATION_HORIZONTAL);
+			assert(!p1.collidesWith(p2));
+		});
+		
+		it ("should return true when two placements overlap by one aligned with orientation", function(){
+			var ship1 = new Carrier(), 
+		    	ship2 = new Carrier(),
+		    	p1 = new Placement(ship1, 5, 5, Ship.ORIENTATION_HORIZONTAL),
+		    	p2 = new Placement(ship2, 9, 5, Ship.ORIENTATION_HORIZONTAL);
+			assert(p1.collidesWith(p2));
+		});
+		
+		it ("should return true when to placements cross each other", function(){
+			var ship1 = new Carrier(), 
+		    	ship2 = new Carrier(),
+		    	p1 = new Placement(ship1, 5, 5, Ship.ORIENTATION_HORIZONTAL),
+		    	p2 = new Placement(ship2, 7, 3, Ship.ORIENTATION_VERTICAL);
+			assert(p1.collidesWith(p2));
 		});
 	});
 });
