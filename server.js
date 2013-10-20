@@ -31,7 +31,11 @@ wsServer.on('request', function(req) {
 			message = JSON.parse(message.utf8Data);
 			if (message.command && typeof(iface[message.command]) == 'function') {
 				var func = iface[message.command];
-				conn.sendUTF(JSON.stringify({status:"OK", result:func.apply(iface, message.data || [])}));
+				conn.sendUTF(JSON.stringify({
+					status:"OK",
+					command:message.command,
+					result:func.apply(iface, message.data || [])
+				}));
 			} else {
 				conn.sendUTF(JSON.stringify({status:"Error", reason:"command not found"}));
 			}
