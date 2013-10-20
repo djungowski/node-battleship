@@ -7,7 +7,7 @@ describe("Game", function(){
 		for (var i = 0; i < 2; i++) game.getNextInterface().finishPlacement();
 	});
 
-	it ("should activate at least one interface on game start", function(done) {
+	it ("should activate exactly one interface on game start", function(done) {
 		var game = new Game();
 		for (var i = 0; i < 2; i++) {
 			game.getNextInterface().on('activate', done);
