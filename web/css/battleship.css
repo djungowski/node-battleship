@@ -20,6 +20,22 @@ html, body {
     padding: 6px;
 }
 
+.player .field {
+    position: relative;
+}
+
+.player .interaction-blocked {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.1;
+    background-color: #000000;
+    cursor: not-allowed;
+}
+
 .player.opponent {
     float: right
 }
@@ -38,7 +54,7 @@ table td {
     text-align: center;
     height: 20px;
     color: #369;
-    cursor: not-allowed;
+    cursor: pointer;
 }
 
 table td.used {
@@ -52,7 +68,6 @@ table td.ship {
 .player.opponent table td {
     border-color: #AA0000;
     color: #AA0000;
-    cursor: pointer;
 }
 
 .player.opponent table td.used {
@@ -76,5 +91,5 @@ footer {
     background-color: #3AAC4C;
     padding: 20px;
     color: #ffffff;
-    border-radius: 20px;
+    border-radius: 10px;
 }
