@@ -19,8 +19,9 @@ wsServer.on('request', function(req) {
 		var iface = game.getNextInterface();
 		conn.sendUTF(JSON.stringify({status:"OK", message:"Greetings, Professor Falken."}));
 	} catch (err) {
+		// couldn't get a game interface. this is most likely because two players are already in the game.
 		conn.sendUTF(JSON.stringify({status:"Error", reason: err}));
-		conn.close();
+		return conn.close();
 	}
 	
 	conn.on('message', function(message){
@@ -46,6 +47,12 @@ wsServer.on('request', function(req) {
 	
 	game.on('gameStart', function(){
 		conn.sendUTF(JSON.stringify({event:"gameStart"}));
+	});
+	
+	['activate', 'deactivate'].forEach(function(event){
+		iface.on(event, function(){
+			conn.sendUTF(JSON.stringify({event:event}));
+		});
 	});
 });
 
