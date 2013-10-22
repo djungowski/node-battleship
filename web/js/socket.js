@@ -12,6 +12,7 @@
 
     socket.onmessage = function(event) {
         var message = JSON.parse(event.data);
+        console.log(message);
 
         switch(message.event) {
             case 'full':
@@ -24,6 +25,16 @@
                 game.showNameForm(true);
                 playingField.renderField();
                 game.initPlayingField();
+                break;
+        }
+
+        switch(message.command) {
+            case 'setPlayerName':
+                var yourName = $('#player-name').val();
+                nameForm.trigger('closeModal');
+                game.players.you.name = yourName;
+                game.players.you.id = ''; // Kommt vom Server!
+                $('.player.you .player-name').html(yourName)
                 break;
         }
     };
