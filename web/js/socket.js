@@ -18,7 +18,7 @@
                 $('#loading').html("Der Server ist voll.");
                 break;
 
-            case 'OK':
+            case 'CONNECTED':
                 $('.hide-on-start').show();
                 game.setLoading(false);
                 game.showNameForm(true);
