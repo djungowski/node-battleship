@@ -9,7 +9,6 @@
     };
 
     socket.onclose = function(event) {
-        console.log(event);
         game.setLoading(true);
         game.showNameForm(false);
     };
