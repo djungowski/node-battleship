@@ -14,16 +14,16 @@ wsServer = new websocket.server({
 });
 
 wsServer.on('request', function(req) {
-	var conn = req.accept();
-	try {
+    try {
+        var conn = req.accept();
 		var iface = game.getNextInterface();
 		conn.sendUTF(JSON.stringify({status:"OK", message:"Greetings, Professor Falken."}));
 	} catch (err) {
 		// couldn't get a game interface. this is most likely because two players are already in the game.
-		conn.sendUTF(JSON.stringify({status:"Error", reason: err}));
-		return conn.close();
-	}
-	
+        req.reject();
+        return;
+    }
+
 	conn.on('message', function(message){
 		// binary messages are not supported.
 		if (message.type !== 'utf8') return;
