@@ -14,12 +14,13 @@ wsServer = new websocket.server({
 });
 
 wsServer.on('request', function(req) {
+    var conn = req.accept();
     try {
-        var conn = req.accept();
 		var iface = game.getNextInterface();
 		conn.sendUTF(JSON.stringify({status:"OK", message:"Greetings, Professor Falken."}));
 	} catch (err) {
 		// couldn't get a game interface. this is most likely because two players are already in the game.
+        conn.sendUTF(JSON.stringify({status:"FULL", message:"The server is full."}));
         req.reject();
         return;
     }
