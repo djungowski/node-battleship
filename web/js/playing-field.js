@@ -1,5 +1,7 @@
 (function() {
-    var PlayingField = function() {
+    var PlayingField = function() {};
+
+    PlayingField.prototype.renderField = function() {
         var me = this;
 
         $('.player table').each(function(key, playerfield) {

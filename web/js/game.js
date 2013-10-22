@@ -2,7 +2,6 @@
     var Game = function() {
         this.initLoader();
         this.initNameForm();
-        this.initPlayingField();
     };
 
     Game.prototype.state = 'preparation';
@@ -75,8 +74,12 @@
         });
     };
 
-    Game.prototype.showNameForm = function() {
-        $('#enter-player-name').trigger('openModal');
+    Game.prototype.showNameForm = function(show) {
+        if (show) {
+            $('#enter-player-name').trigger('openModal');
+        } else {
+            $('#enter-player-name').trigger('closeModal');
+        }
     };
 
     Game.prototype.initPlayingField = function() {
