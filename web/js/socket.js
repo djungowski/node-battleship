@@ -13,5 +13,15 @@
         game.showNameForm(false);
     };
 
+    socket.onmessage = function(event) {
+        var message = JSON.parse(event.data);
+
+        switch(message.status) {
+            case 'FULL':
+                $('#loading').html("Der Server ist voll.");
+                break;
+        }
+    };
+
     window.socket = socket;
 })();
