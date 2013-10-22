@@ -65,12 +65,12 @@
         nameForm.on('submit', function(event) {
             event.preventDefault();
 
-            // Hier fehlt noch die Serverinteraktion
             var yourName = $('#player-name').val();
-            nameForm.trigger('closeModal');
-            me.players.you.name = yourName;
-            me.players.you.id = ''; // Kommt vom Server!
-            $('.player.you .player-name').html(yourName)
+            var message = {
+                command: 'setPlayerName',
+                data: [yourName]
+            };
+            socket.send(JSON.stringify(message));
         });
     };
 
