@@ -87,7 +87,7 @@ footer {
     color: #ffffff;
 }
 
-#enter-player-name {
+.modal-window {
     background-color: #3AAC4C;
     padding: 20px;
     color: #ffffff;

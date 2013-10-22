@@ -1,5 +1,6 @@
 (function() {
     var Game = function() {
+        this.initLoader();
         this.initNameForm();
         this.initPlayingField();
     };
@@ -60,7 +61,6 @@
                 nameForm.find('input').focus();
             }
         });
-        nameForm.trigger('openModal');
 
         var me = this;
         nameForm.on('submit', function(event) {
@@ -73,6 +73,10 @@
             me.players.you.id = ''; // Kommt vom Server!
             $('.player.you .player-name').html(yourName)
         });
+    };
+
+    Game.prototype.showNameForm = function() {
+        $('#enter-player-name').trigger('openModal');
     };
 
     Game.prototype.initPlayingField = function() {
@@ -95,6 +99,22 @@
                 console.log(field.attr('y'));
             }
         });
+    };
+
+    Game.prototype.initLoader = function() {
+        $('#loading').easyModal({
+            closeOnEscape: false,
+            overlayClose: false
+        });
+        this.setLoading(true);
+    }
+
+    Game.prototype.setLoading = function(loading) {
+        if (loading) {
+            $('#loading').trigger('openModal');
+        } else {
+            $('#loading').trigger('closeModal');
+        }
     };
 
     window.game = new Game();
