@@ -13,12 +13,12 @@
     socket.onmessage = function(event) {
         var message = JSON.parse(event.data);
 
-        switch(message.status) {
-            case 'FULL':
+        switch(message.event) {
+            case 'full':
                 $('#loading').html("Der Server ist voll.");
                 break;
 
-            case 'CONNECTED':
+            case 'connected':
                 $('.hide-on-start').show();
                 game.setLoading(false);
                 game.showNameForm(true);
