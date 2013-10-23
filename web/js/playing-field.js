@@ -31,6 +31,8 @@
     };
 
     PlayingField.prototype.setShips = function(ships) {
+        var me = this;
+
         ships.forEach(function(shipInfo) {
             // x: get nth column
             // y: get nth row
@@ -40,8 +42,7 @@
 
             // Do as long as there is ship
             for (var i = 1; i <= shipInfo.ship.size; i++) {
-                var shipPart = $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
-                shipPart.addClass('ship ' + shipInfo.ship.type);
+                me.placeShip(x, y, shipInfo);
 
                 // Increase values for next ship field
                 if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
@@ -53,6 +54,16 @@
 
             // TODO: implement rotation
         });
+    };
+
+    PlayingField.prototype.placeShip = function(x, y, shipInfo) {
+        var shipPart = $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
+        shipPart.addClass('ship ' + shipInfo.ship.type);
+        shipPart.on('click', {shipInfo: shipInfo}, this.moveShip);
+    };
+
+    PlayingField.prototype.moveShip = function(event) {
+        console.log(event);
     };
 
     window.playingField = new PlayingField();
