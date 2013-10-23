@@ -102,7 +102,7 @@ footer p {
     display: none;
 }
 
-.place-ships {
+.player .place-ships {
     position: absolute;
     top: 50px;
     left: 155px;

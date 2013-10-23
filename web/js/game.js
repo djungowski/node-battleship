@@ -30,6 +30,18 @@
         this.showNameForm(true);
         playingField.renderField();
         this.initPlayingField();
+        this.initPlaceShipsLinks();
+    };
+
+    Game.prototype.initPlaceShipsLinks = function() {
+        $('.place-ships-link').each(function(key, link) {
+            $(link).on('click', function(event) {
+                event.preventDefault();
+                socket.sendJson({
+                    command: 'getPlacements'
+                });
+            });
+        });
     };
 
     Game.prototype.setState = function(state) {

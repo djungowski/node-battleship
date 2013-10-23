@@ -45,6 +45,11 @@
                 };
                 socket.sendJson(message);
                 break;
+
+            case 'getPlacements':
+                $('.place-ships').hide();
+                $('.player.you .interaction-blocked').hide();
+                break;
         }
     };
 
