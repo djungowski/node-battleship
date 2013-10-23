@@ -30,6 +30,10 @@
         return cols;
     };
 
+    PlayingField.prototype.getField = function(x, y) {
+        return $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
+    };
+
     PlayingField.prototype.setShips = function(ships) {
         var me = this;
 
@@ -57,13 +61,15 @@
     };
 
     PlayingField.prototype.placeShip = function(x, y, shipInfo) {
-        var shipPart = $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
+        var shipPart = this.getField(x, y);
         shipPart.addClass('ship ' + shipInfo.ship.type);
-        shipPart.on('click', {shipInfo: shipInfo}, this.moveShip);
+        shipPart.bind('click', {shipInfo: shipInfo}, this.moveShip);
     };
 
     PlayingField.prototype.moveShip = function(event) {
-        console.log(event);
+        console.log(event.target);
+        // First: remove click binding
+        $(event.target).unbind('click', this.moveShip);
     };
 
     window.playingField = new PlayingField();

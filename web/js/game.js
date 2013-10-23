@@ -37,7 +37,7 @@
 
     Game.prototype.initPlaceShipsLinks = function() {
         $('.place-ships-link').each(function(key, link) {
-            $(link).on('click', function(event) {
+            $(link).bind('click', function(event) {
                 event.preventDefault();
                 socket.sendJson({
                     command: 'getPlacements'
@@ -78,7 +78,7 @@
         });
 
         var me = this;
-        nameForm.on('submit', function(event) {
+        nameForm.bind('submit', function(event) {
             event.preventDefault();
 
             var yourName = $('#player-name').val();
@@ -107,7 +107,7 @@
         $('.interaction-blocked').show();
 
         // Klick auf das rechte Spielfeld
-        opponent.find('table').on('click', function(event) {
+        opponent.find('table').bind('click', function(event) {
             field = $(event.target);
             if (!field.hasClass('used')) {
                 // Hier fehlt noch die Serverinteraktion
