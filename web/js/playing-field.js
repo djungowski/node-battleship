@@ -44,32 +44,47 @@
             var x = shipInfo.x + 1;
             var y = shipInfo.y + 1;
 
-            // Do as long as there is ship
-            for (var i = 1; i <= shipInfo.ship.size; i++) {
-                me.placeShip(x, y, shipInfo);
-
-                // Increase values for next ship field
-                if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
-                    x += 1;
-                } else {
-                    y += 1;
-                }
-            }
+            me.placeShip(x, y, shipInfo);
 
             // TODO: implement rotation
         });
     };
 
     PlayingField.prototype.placeShip = function(x, y, shipInfo) {
-        var shipPart = this.getField(x, y);
-        shipPart.addClass('ship ' + shipInfo.ship.type);
-        shipPart.bind('click', {shipInfo: shipInfo}, this.moveShip);
+        var shipClassName = 'ship ' + shipInfo.ship.type;
+
+        // First: remove current ship
+        $('.player.you table .ship.' + shipInfo.ship.type).removeClass(shipClassName);
+
+        // Do as long as there is ship
+        for (var i = 1; i <= shipInfo.ship.size; i++) {
+            var shipPart = this.getField(x, y);
+            shipPart.addClass(shipClassName);
+            shipPart.bind('click', {shipInfo: shipInfo}, this.moveShip);
+            // Increase values for next ship field
+            if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
+                x += 1;
+            } else {
+                y += 1;
+            }
+        }
     };
 
     PlayingField.prototype.moveShip = function(event) {
-        console.log(event.target);
+        var shipInfo = event.data.shipInfo;
+        var me = this;
+
         // First: remove click binding
         $(event.target).unbind('click', this.moveShip);
+        // mouseover binding for table
+        $('.player.you table').bind('mouseover', function(event) {
+            var target = $(event.target);
+            var x = target.attr('x');
+            var y = target.attr('y');
+            if (x != undefined && y != undefined) {
+                me.placeShip(x, y, shipInfo);
+            }
+        });
     };
 
     window.playingField = new PlayingField();
