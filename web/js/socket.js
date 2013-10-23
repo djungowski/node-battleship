@@ -26,6 +26,10 @@
                 playingField.renderField();
                 game.initPlayingField();
                 break;
+
+            case 'opponentNameChanged':
+                var opponentName = message.data[0];
+                $('.player.opponent .player-name').html(opponentName)
         }
 
         switch(message.command) {
