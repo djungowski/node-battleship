@@ -87,6 +87,10 @@ footer {
     color: #ffffff;
 }
 
+footer p {
+    margin: 0;
+}
+
 .modal-window {
     background-color: #3AAC4C;
     padding: 20px;
@@ -94,6 +98,17 @@ footer {
     border-radius: 10px;
 }
 
-.hide-on-start {
+.hide-on-start, .show-on-gamestart {
     display: none;
+}
+
+.place-ships {
+    position: absolute;
+    top: 50px;
+    left: 155px;
+    background: #fff;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 2;
 }

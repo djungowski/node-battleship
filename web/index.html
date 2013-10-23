@@ -27,6 +27,10 @@
     <div class="player you">
         <p class="player-name">Du</p>
         <div class="field">
+            <div class="hide-on-start place-ships">
+                Bist du bereit?
+                <a href="#">Jetzt Schiffe platzieren</a>
+            </div>
             <div class="interaction-blocked"></div>
             <table></table>
         </div>
@@ -41,8 +45,14 @@
 </div>
 
 <footer class="hide-on-start">
-    An der Reihe:
-    <span id="whose-turn-is-it"></span>
+    <p class="hide-on-start">
+        Bist du bereit?
+        <a href="#">Jetzt Schiffe platzieren</a>
+    </p>
+    <p class="show-on-gamestart">
+        An der Reihe:
+        <span id="whose-turn-is-it"></span>
+    </p>
 </footer>
 
 <script type="text/javascript" src="js/playing-field.js"></script>

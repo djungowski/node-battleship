@@ -23,11 +23,7 @@
                 break;
 
             case 'connected':
-                $('.hide-on-start').show();
-                game.setLoading(false);
-                game.showNameForm(true);
-                playingField.renderField();
-                game.initPlayingField();
+                game.init();
                 break;
 
             case 'opponentNameChanged':

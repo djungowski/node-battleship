@@ -24,6 +24,14 @@
         opponent: null
     };
 
+    Game.prototype.init = function() {
+        $('.hide-on-start').show();
+        this.setLoading(false);
+        this.showNameForm(true);
+        playingField.renderField();
+        this.initPlayingField();
+    };
+
     Game.prototype.setState = function(state) {
         this.state = state;
     };
@@ -82,7 +90,7 @@
         // Am Anfang ist das rechte Spielfeld geblockt
         // Das rechte Spielfeld wird erst entblockt, wenn alle Spieler ihre Schiffe platziert
         // haben und wenn der User an der Reihe ist
-        opponent.find('.interaction-blocked').show();
+        $('.interaction-blocked').show();
 
         // Klick auf das rechte Spielfeld
         opponent.find('table').on('click', function(event) {
