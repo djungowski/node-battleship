@@ -57,12 +57,32 @@ table td {
     cursor: pointer;
 }
 
+.player.you table td {
+    cursor: inherit;
+}
+
+.player.you table td.ship {
+    cursor: pointer;
+}
+
 table td.used {
     background-color: #369;
 }
 
-table td.ship {
+table td.ship.battleship {
     background-color: #919191;
+}
+
+table td.ship.carrier {
+    background-color: #912f1c;
+}
+
+table td.ship.cruiser {
+    background-color: #5c6091;
+}
+
+table td.ship.destroyer {
+    background-color: #18914d;
 }
 
 .player.opponent table td {
