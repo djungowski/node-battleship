@@ -20,14 +20,8 @@
      * @type {{you: {id: null, name: null}, opponent: {id: null, name: null}}}
      */
     Game.prototype.players = {
-        you: {
-            id: null,
-            name: null
-        },
-        opponent: {
-            id: null,
-            name: null
-        }
+        you: null,
+        opponent: null
     };
 
     Game.prototype.setState = function(state) {

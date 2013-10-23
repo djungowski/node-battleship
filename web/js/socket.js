@@ -29,6 +29,7 @@
 
             case 'opponentNameChanged':
                 var opponentName = message.data[0];
+                game.players.opponent = opponentName;
                 $('.player.opponent .player-name').html(opponentName)
         }
 
@@ -36,9 +37,10 @@
             case 'setPlayerName':
                 var yourName = $('#player-name').val();
                 nameForm.trigger('closeModal');
-                game.players.you.name = yourName;
-                game.players.you.id = ''; // Kommt vom Server!
+                game.players.you = yourName;
                 $('.player.you .player-name').html(yourName)
+
+                // W
                 break;
         }
     };
