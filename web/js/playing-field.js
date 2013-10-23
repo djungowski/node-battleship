@@ -42,7 +42,9 @@
             for (var i = 1; i <= shipInfo.ship.size; i++) {
                 var shipPart = $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
                 shipPart.addClass('ship ' + shipInfo.ship.type);
-                if(shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
+
+                // Increase values for next ship field
+                if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
                     x += 1;
                 } else {
                     y += 1;
