@@ -36,7 +36,7 @@ wsServer.on('request', function(req) {
 				conn.sendUTF(JSON.stringify({
 					status:"OK",
 					command:message.command,
-					result:func.apply(iface, message.data || [])
+					data:func.apply(iface, message.data || [])
 				}));
 			} else {
 				conn.sendUTF(JSON.stringify({status:"Error", reason:"command not found"}));
