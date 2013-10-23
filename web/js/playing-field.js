@@ -60,7 +60,7 @@
         for (var i = 1; i <= shipInfo.ship.size; i++) {
             var shipPart = this.getField(x, y);
             shipPart.addClass(shipClassName);
-            shipPart.bind('click', {shipInfo: shipInfo}, this.moveShip);
+            shipPart.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
             // Increase values for next ship field
             if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
                 x += 1;
@@ -72,7 +72,8 @@
 
     PlayingField.prototype.moveShip = function(event) {
         var shipInfo = event.data.shipInfo;
-        var me = this;
+        var me = event.data.me;
+        console.log(me);
 
         // First: remove click binding
         $(event.target).unbind('click', this.moveShip);
