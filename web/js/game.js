@@ -24,6 +24,8 @@
         opponent: null
     };
 
+    Game.prototype.ships = [];
+
     Game.prototype.init = function() {
         $('.hide-on-start').show();
         this.setLoading(false);
@@ -132,6 +134,11 @@
         } else {
             $('#loading').trigger('closeModal');
         }
+    };
+
+    Game.prototype.setShips = function(ships) {
+        this.ships = ships;
+        playingField.setShips(ships);
     };
 
     window.game = new Game();

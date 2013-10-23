@@ -11,7 +11,7 @@
 
     PlayingField.prototype.createRows = function() {
         rows = [];
-        for(rowsCreated = 1; rowsCreated <= window.field.rows; rowsCreated++) {
+        for(rowsCreated = 0; rowsCreated < window.field.rows; rowsCreated++) {
             currentRow = $('<tr></tr>');
             currentRow.append(this.createCols(rowsCreated))
             rows.push(currentRow)
@@ -21,10 +21,16 @@
 
     PlayingField.prototype.createCols = function(currentRow) {
         cols = [];
-        for(colsCreated = 1; colsCreated <= window.field.cols; colsCreated++) {
-            cols.push($('<td x="' + currentRow + '" y="' + colsCreated + '" title="Zeile ' + currentRow + ' Spalte ' + colsCreated + '"></td>'))
+        for(colsCreated = 0; colsCreated < window.field.cols; colsCreated++) {
+            cols.push($('<td x="' + currentRow + '" y="' + colsCreated + '" title="Zeile ' + (currentRow + 1) + ' Spalte ' + (colsCreated + 1) + '"></td>'))
         }
         return cols;
+    };
+
+    PlayingField.prototype.setShips = function(ships) {
+        ships.forEach(function(ship) {
+            console.log(ship);
+        });
     };
 
     window.playingField = new PlayingField();
