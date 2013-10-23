@@ -1,8 +1,11 @@
 (function() {
     var socket = new WebSocket('ws://localhost:3000');
 
-    socket.onopen = function(event) {
+    socket.sendJson = function(message) {
+        socket.send(JSON.stringify(message));
+    };
 
+    socket.onopen = function(event) {
     };
 
     socket.onclose = function(event) {
@@ -40,7 +43,11 @@
                 game.players.you = yourName;
                 $('.player.you .player-name').html(yourName)
 
-                // W
+                // Den Spielernamen vom Gegener auslesen, sobald der eigene gesetzt wurde
+                var message = {
+                    command: 'getOpponentName'
+                };
+                socket.sendJson(message);
                 break;
         }
     };

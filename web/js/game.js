@@ -64,7 +64,7 @@
                 command: 'setPlayerName',
                 data: [yourName]
             };
-            socket.send(JSON.stringify(message));
+            socket.sendJson(message);
         });
     };
 
