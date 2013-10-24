@@ -92,7 +92,6 @@
         shipOnField.unbind('click', this.moveShip);
         // Second: Add different click binding
         $('.player.you table').bind('click', function(event) {
-            console.log(event.target);
             var target = $(event.target);
             var x = target.attr('x');
             var y = target.attr('y');
@@ -100,7 +99,7 @@
                 x = parseInt(x);
                 y = parseInt(y);
                 me.placeShip((x + 1), (y + 1), shipInfo);
-                $('.player.you table').unbind('mouseover', me.whenmovingship);
+                $('.player.you table').unbind('mouseover', {shipInfo: shipInfo, me: me}, me.whenmovingship);
                 $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo, me: me}, this.moveShip);
             }
         });
@@ -116,9 +115,14 @@
 
         var x = target.attr('x');
         var y = target.attr('y');
-        if (x != undefined && y != undefined) {
-            x = parseInt(x);
-            y = parseInt(y);
+        var hasAxisInfo = (x != undefined && y != undefined);
+        // Ship must not leave the playing field
+        x = parseInt(x);
+        y = parseInt(y);
+        if (x + shipInfo.ship.size > window.field.cols) {
+            x = window.field.cols - shipInfo.ship.size;
+        }
+        if (hasAxisInfo) {
             me.renderShip((x + 1), (y + 1), shipInfo);
         }
     }
