@@ -154,14 +154,35 @@
         opponent.find('table').bind('click', function(event) {
             field = $(event.target);
             if (!field.hasClass('used')) {
-                // Hier fehlt noch die Serverinteraktion
-                field.addClass('used');
-
                 // Beispiel: x und y auslesen
-                console.log(field.attr('x'));
-                console.log(field.attr('y'));
+                var x = parseInt(field.attr('x'));
+                var y = parseInt(field.attr('y'));
+
+                window.socket.sendJson({
+                    command: 'shoot',
+                    data: [x, y]
+                });
             }
         });
+    };
+
+    Game.prototype.setFieldStatus = function(x, y, status) {
+        var field = this.getField(x, y);
+        switch(status) {
+            case 'used':
+                field.addClass('used');
+                break;
+
+            case 'hit':
+                field.addClass('used');
+                field.addClass('hit');
+                break;
+
+            case 'normal':
+                field.removeClass('used');
+                field.removeClass('hit');
+                break;
+        }
     };
 
     Game.prototype.initLoader = function() {

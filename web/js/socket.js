@@ -64,6 +64,14 @@
                     $('.opponent .player-name').html(opponentName);
                 }
                 break;
+
+            case 'shoot':
+                var hit = message.data.hit;
+                if (hit) {
+
+                } else {
+
+                }
         }
     };
 
