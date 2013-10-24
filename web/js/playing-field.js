@@ -32,20 +32,30 @@
         return cols;
     };
 
+    // This needs an offset 1!
     PlayingField.prototype.getField = function(x, y) {
         return $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
     };
 
-    // TODO: implement orientation
-    PlayingField.prototype.hasRangeShip = function(x, y, range) {
+    PlayingField.prototype.canShipBePlaced = function(x, y, shipInfo) {
+        x = parseInt(x) + 1;
+        y = parseInt(y) + 1;
+
         var field;
-        for (var i; i <= range; i++) {
+
+        for (var i = 1; i <= shipInfo.ship.size; i++) {
             field = this.getField(x, y);
-            if (field.hasClass('ship')) {
-                return true;
+            if (field.hasClass('ship') && !field.hasClass(shipInfo.ship.type)) {
+                return false;
+            }
+
+            if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
+                x += 1;
+            } else {
+                y += 1;
             }
         }
-        return false;
+        return true;
     };
 
     PlayingField.prototype.setShips = function(ships) {
@@ -116,7 +126,7 @@
         var x = target.attr('x');
         var y = target.attr('y');
 
-        if (target.hasClass('ship') && !target.hasClass(shipInfo.ship.type)) {
+        if (!me.canShipBePlaced(x, y, shipInfo)) {
             return;
         }
 
@@ -152,14 +162,15 @@
         var x = target.attr('x');
         var y = target.attr('y');
         var hasAxisInfo = (x != undefined && y != undefined);
-        var doesNotCollideWithOtherShip = !target.hasClass('ship');
-        // Ship must not leave the playing field
+
         x = parseInt(x);
         y = parseInt(y);
+        var canShipBePlaced = me.canShipBePlaced(x, y, shipInfo);
+        // Ship must not leave the playing field
         if (x + shipInfo.ship.size > window.field.cols) {
             x = window.field.cols - shipInfo.ship.size;
         }
-        if (hasAxisInfo && doesNotCollideWithOtherShip) {
+        if (hasAxisInfo && canShipBePlaced) {
             me.renderShip((x + 1), (y + 1), shipInfo);
         }
     }
