@@ -87,15 +87,19 @@
     Game.prototype.setActivePlayer = function(player) {
         this.activePlayer = player;
 
-        var youBlock = $('.player.you .interaction-blocked');
-        var opponentBlock = $('.player.opponent .interaction-blocked');
+        var you = $('.player.you');
+        var opponent = $('.player.opponent');
 
         if (player == 'you') {
-            opponentBlock.hide();
+            opponent.find('.interaction-blocked').hide();
+            you.find('.player-name').addClass('active-player');
+            opponent.find('.player-name').removeClass('active-player');
             $('.whose-turn-is-it').html(this.players.you);
         } else {
-            opponentBlock.show();
-            youBlock.show();
+            opponent.find('.interaction-blocked').show();
+            you.find('.interaction-blocked').show();
+            you.find('.player-name').removeClass('active-player');
+            opponent.find('.player-name').addClass('active-player');
             $('.whose-turn-is-it').html(this.players.opponent);
         }
 
