@@ -50,7 +50,7 @@ table {
 }
 
 table td {
-    border: 1px solid #369;
+    background-color: #BBCBE7;
     text-align: center;
     height: 20px;
     color: #369;
