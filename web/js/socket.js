@@ -50,13 +50,10 @@
                 break;
                 
             case 'getOpponentName':
-                var opponentName = message.data;
+                var opponentName = message.data[0];
                 game.players.opponent = opponentName;
                 $('.opponent .player-name').html(opponentName);
                 break;
-
-            case 'finishPlacement':
-                game.finishPlacement();
         }
     };
 

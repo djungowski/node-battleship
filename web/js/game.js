@@ -38,10 +38,15 @@
 
     Game.prototype.start = function() {
         $('.waiting-for-opponent').hide();
-        $('.whose-turn-is-it').show();
+        $('.show-on-gamestart').show();
+        this.setState('playing');
+        // First off: Think that it's the opponents turn. Is changed by socket if different
+        $('.whose-turn-is-it').html(this.players.opponent);
     };
 
     Game.prototype.initPlaceShipsLinks = function() {
+        var me = this;
+
         $('.place-ships-link').bind('click', function(event) {
             event.preventDefault();
             socket.sendJson({
@@ -55,6 +60,7 @@
             socket.sendJson({
                 command: 'finishPlacement'
             });
+            me.finishPlacement();
         });
     };
 
@@ -68,6 +74,14 @@
         $('.placement-done').hide();
         $('.player.you .interaction-blocked').show();
         $('.waiting-for-opponent').show();
+    };
+
+    Game.prototype.setState = function(state) {
+        this.state = state;
+    };
+
+    Game.prototype.isState = function(state) {
+        return this.state == state;
     };
 
     Game.prototype.setActivePlayer = function(player) {
