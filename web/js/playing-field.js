@@ -25,7 +25,7 @@
     PlayingField.prototype.createCols = function(currentRow) {
         cols = [];
         for(colsCreated = 0; colsCreated < window.field.cols; colsCreated++) {
-            cols.push($('<td x="' + currentRow + '" y="' + colsCreated + '" title="Zeile ' + (currentRow + 1) + ' Spalte ' + (colsCreated + 1) + '"></td>'))
+            cols.push($('<td x="' + colsCreated + '" y="' + currentRow + '" title="Zeile ' + (currentRow + 1) + ' Spalte ' + (colsCreated + 1) + '"></td>'))
         }
         return cols;
     };
@@ -52,6 +52,8 @@
 
     PlayingField.prototype.placeShip = function(x, y, shipInfo) {
         var shipClassName = 'ship ' + shipInfo.ship.type;
+        console.log(x);
+        console.log(y);
 
         // First: remove current ship
         $('.player.you table .ship.' + shipInfo.ship.type).removeClass(shipClassName);
@@ -73,17 +75,16 @@
     PlayingField.prototype.moveShip = function(event) {
         var shipInfo = event.data.shipInfo;
         var me = event.data.me;
-        console.log(me);
 
         // First: remove click binding
         $(event.target).unbind('click', this.moveShip);
         // mouseover binding for table
         $('.player.you table').bind('mouseover', function(event) {
             var target = $(event.target);
-            var x = target.attr('x');
-            var y = target.attr('y');
+            var x = parseInt(target.attr('x'));
+            var y = parseInt(target.attr('y'));
             if (x != undefined && y != undefined) {
-                me.placeShip(x, y, shipInfo);
+                me.placeShip((x + 1), (y + 1), shipInfo);
             }
         });
     };
