@@ -53,6 +53,7 @@ table td {
     height: 20px;
     color: #369;
     cursor: pointer;
+    height: 30px;
 }
 
 .player.you table td {
