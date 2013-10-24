@@ -47,8 +47,6 @@
             var y = shipInfo.y + 1;
 
             me.placeShip(x, y, shipInfo);
-
-            // TODO: implement rotation
         });
     };
 
@@ -119,7 +117,7 @@
             }
             $('.player.you table').unbind('mouseover');
             me.placeShip((x + 1), (y + 1), shipInfo);
-            $('.player.you table td').unbind('click');
+            $('.player.you table td').unbind('click', me.onshipplacement);
             $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo, me: me}, this.moveShip);
 
             me.currentlyMovingShip = false;
