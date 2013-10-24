@@ -116,13 +116,14 @@
         var x = target.attr('x');
         var y = target.attr('y');
         var hasAxisInfo = (x != undefined && y != undefined);
+        var doesNotCollideWithOtherShip = !target.hasClass('ship');
         // Ship must not leave the playing field
         x = parseInt(x);
         y = parseInt(y);
         if (x + shipInfo.ship.size > window.field.cols) {
             x = window.field.cols - shipInfo.ship.size;
         }
-        if (hasAxisInfo) {
+        if (hasAxisInfo && doesNotCollideWithOtherShip) {
             me.renderShip((x + 1), (y + 1), shipInfo);
         }
     }
