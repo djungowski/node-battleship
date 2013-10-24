@@ -173,7 +173,7 @@
         var y = parseInt(shootData.y) + 1;
 
         if (hit) {
-            window.playingField.setOpponentFieldStatus(x, y, 'hit')
+            window.playingField.setOpponentFieldStatus(x, y, 'hit', shootData.ship.type)
         } else {
             window.playingField.setOpponentFieldStatus(x, y, 'used')
         }

@@ -75,7 +75,8 @@ table td.used {
 }
 
 table td.hit {
-
+    background: #BBCBE7 url(../images/explosion.png) center center;
+    cursor: not-allowed;
 }
 
 table td.ship.battleship {

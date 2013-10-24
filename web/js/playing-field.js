@@ -177,7 +177,7 @@
         }
     };
 
-    PlayingField.prototype.setOpponentFieldStatus = function(x, y, status) {
+    PlayingField.prototype.setOpponentFieldStatus = function(x, y, status, shipType) {
         var field = this.getOpponentField(x, y);
         switch(status) {
             case 'used':
@@ -185,13 +185,11 @@
                 break;
 
             case 'hit':
-                field.addClass('used');
-                field.addClass('hit');
+                field.addClass('used hit ship ' + shipType)
                 break;
 
             case 'normal':
-                field.removeClass('used');
-                field.removeClass('hit');
+                field.removeClass('used hit');
                 break;
         }
     };
