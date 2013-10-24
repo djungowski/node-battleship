@@ -146,10 +146,7 @@
 
             window.socket.sendJson({
                 command: 'place',
-                ship: shipInfo.ship.type,
-                x: x,
-                y: y,
-                orientation: shipInfo.orientation
+                data: [shipInfo.ship.type, x, y, shipInfo.orientation]
             });
         }
     };
