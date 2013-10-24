@@ -37,6 +37,11 @@
         return $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
     };
 
+    // This needs an offset 1!
+    PlayingField.prototype.getOpponentField = function(x, y) {
+        return $('.player.opponent table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
+    };
+
     PlayingField.prototype.canShipBePlaced = function(x, y, shipInfo) {
         x = parseInt(x) + 1;
         y = parseInt(y) + 1;
@@ -170,7 +175,26 @@
         if (hasAxisInfo && canShipBePlaced) {
             me.renderShip((x + 1), (y + 1), shipInfo);
         }
-    }
+    };
+
+    PlayingField.prototype.setOpponentFieldStatus = function(x, y, status) {
+        var field = this.getOpponentField(x, y);
+        switch(status) {
+            case 'used':
+                field.addClass('used');
+                break;
+
+            case 'hit':
+                field.addClass('used');
+                field.addClass('hit');
+                break;
+
+            case 'normal':
+                field.removeClass('used');
+                field.removeClass('hit');
+                break;
+        }
+    };
 
     window.playingField = new PlayingField();
 })()

@@ -66,12 +66,8 @@
                 break;
 
             case 'shoot':
-                var hit = message.data.hit;
-                if (hit) {
-
-                } else {
-
-                }
+                game.setFieldStatus(message.data);
+                break;
         }
     };
 

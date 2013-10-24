@@ -166,22 +166,16 @@
         });
     };
 
-    Game.prototype.setFieldStatus = function(x, y, status) {
-        var field = this.getField(x, y);
-        switch(status) {
-            case 'used':
-                field.addClass('used');
-                break;
+    Game.prototype.setFieldStatus = function(shootData) {
+        var hit = shootData.hit;
+        // CSS needs an offset 1
+        var x = parseInt(shootData.x) + 1;
+        var y = parseInt(shootData.y) + 1;
 
-            case 'hit':
-                field.addClass('used');
-                field.addClass('hit');
-                break;
-
-            case 'normal':
-                field.removeClass('used');
-                field.removeClass('hit');
-                break;
+        if (hit) {
+            window.playingField.setOpponentFieldStatus(x, y, 'hit')
+        } else {
+            window.playingField.setOpponentFieldStatus(x, y, 'used')
         }
     };
 
