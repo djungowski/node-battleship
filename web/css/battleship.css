@@ -34,6 +34,11 @@ html, body {
     cursor: not-allowed;
 }
 
+.player.opponent .interaction-blocked {
+    background: #000;
+    opacity: 0.1;
+}
+
 .player.opponent {
     float: right
 }
