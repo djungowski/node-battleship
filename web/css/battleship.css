@@ -3,6 +3,10 @@ html, body {
     font-family: helvetica, sans-serif;
 }
 
+a {
+    color: #B1E939;
+}
+
 #content {
     overflow: hidden;
     height: 100%;
@@ -136,7 +140,7 @@ footer p {
     position: absolute;
     top: 50px;
     left: 155px;
-    background: #fff;
+    /*background: #fff;*/
     display: block;
     padding: 10px;
     border-radius: 5px;
