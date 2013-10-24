@@ -95,7 +95,6 @@
         shipOnField.unbind('click', this.moveShip);
         // Second: Add different click binding
         $('.player.you table td').bind('click', {shipInfo: shipInfo, me: me}, me.onshipplacement);
-
         // Last: mouseover binding for table
         $('.player.you table').bind('mouseover', {shipInfo: shipInfo, me: me}, me.whenmovingship);
     };
@@ -107,10 +106,9 @@
         var x = target.attr('x');
         var y = target.attr('y');
 
-        if (target.hasClass('ship')) {
+        if (target.hasClass('ship') && !target.hasClass(shipInfo.ship.type)) {
             return;
         }
-        console.log(target);
 
         if (x != undefined && y != undefined) {
             x = parseInt(x);
