@@ -12,6 +12,10 @@ img {
     top: 3px;
 }
 
+img.large {
+    top: 10px;
+}
+
 #content {
     overflow: hidden;
     height: 100%;
@@ -125,6 +129,11 @@ footer p {
     margin: 0;
 }
 
+footer .place-ships, footer .placement-done {
+    position: relative;
+    bottom: 10px;
+}
+
 .modal-window {
     background-color: #3AAC4C;
     padding: 20px;
@@ -140,9 +149,8 @@ footer p {
     position: absolute;
     top: 50px;
     left: 155px;
-    /*background: #fff;*/
     display: block;
-    padding: 10px;
+    padding: 0 10px 15px;
     border-radius: 5px;
     z-index: 2;
 }
@@ -155,8 +163,4 @@ footer p {
 
 #enter-player-name {
     padding-top: 5px;
-}
-
-#enter-player-name img {
-    top: 10px;
 }
