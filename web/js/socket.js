@@ -43,6 +43,9 @@
             case 'deactivate':
                 game.setActivePlayer('opponent');
                 break;
+
+            case 'hit':
+                game.setFieldStatus('you', message.data[0]);
         }
 
         switch(message.command) {
@@ -66,7 +69,7 @@
                 break;
 
             case 'shoot':
-                game.setOpponentFieldStatus(message.data);
+                game.setFieldStatus('opponent', message.data);
                 break;
         }
     };

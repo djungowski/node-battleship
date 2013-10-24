@@ -166,16 +166,16 @@
         });
     };
 
-    Game.prototype.setOpponentFieldStatus = function(shootData) {
+    Game.prototype.setFieldStatus = function(player, shootData) {
         var hit = shootData.hit;
         // CSS needs an offset 1
         var x = parseInt(shootData.x) + 1;
         var y = parseInt(shootData.y) + 1;
 
         if (hit) {
-            window.playingField.setOpponentFieldStatus(x, y, 'hit', shootData.ship.type)
+            window.playingField.setFieldStatus(player, x, y, 'hit', shootData.ship.type)
         } else {
-            window.playingField.setOpponentFieldStatus(x, y, 'used')
+            window.playingField.setFieldStatus(player, x, y, 'used')
         }
     };
 

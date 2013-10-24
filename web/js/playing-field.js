@@ -177,8 +177,12 @@
         }
     };
 
-    PlayingField.prototype.setOpponentFieldStatus = function(x, y, status, shipType) {
-        var field = this.getOpponentField(x, y);
+    PlayingField.prototype.setFieldStatus = function(player, x, y, status, shipType) {
+        if (player == 'you') {
+            var field = this.getField(x, y);
+        } else {
+            var field = this.getOpponentField(x, y);
+        }
         switch(status) {
             case 'used':
                 field.addClass('used');
