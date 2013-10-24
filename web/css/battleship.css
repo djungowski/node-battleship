@@ -132,3 +132,9 @@ footer p {
     border-radius: 5px;
     z-index: 2;
 }
+
+.active-player {
+    background-image: url(../images/gamepad.png);
+    background-repeat: no-repeat;
+    background-position: 10px -4px;
+}
