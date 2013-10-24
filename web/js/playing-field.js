@@ -121,6 +121,14 @@
             $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo, me: me}, this.moveShip);
 
             me.currentlyMovingShip = false;
+
+            window.socket.sendJson({
+                command: 'place',
+                ship: shipInfo.ship.type,
+                x: x,
+                y: y,
+                orientation: shipInfo.orientation
+            });
         }
     };
 
