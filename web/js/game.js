@@ -36,6 +36,11 @@
         socket.sendJson({command:'getOpponentName'});
     };
 
+    Game.prototype.start = function() {
+        $('.waiting-for-opponent').hide();
+        $('.whose-turn-is-it').show();
+    };
+
     Game.prototype.initPlaceShipsLinks = function() {
         $('.place-ships-link').bind('click', function(event) {
             event.preventDefault();
@@ -43,6 +48,13 @@
                 command: 'getPlacements'
             });
             game.startPlacement();
+        });
+
+        $('.placement-done-link').bind('click', function(event) {
+            event.preventDefault();
+            socket.sendJson({
+                command: 'finishPlacement'
+            });
         });
     };
 
@@ -52,8 +64,10 @@
         $('.placement-done').show();
     };
 
-    Game.prototype.setState = function(state) {
-        this.state = state;
+    Game.prototype.finishPlacement = function() {
+        $('.placement-done').hide();
+        $('.player.you .interaction-blocked').show();
+        $('.waiting-for-opponent').show();
     };
 
     Game.prototype.setActivePlayer = function(player) {

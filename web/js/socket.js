@@ -29,7 +29,12 @@
             case 'opponentNameChanged':
                 var opponentName = message.data[0];
                 game.players.opponent = opponentName;
-                $('.player.opponent .player-name').html(opponentName)
+                $('.opponent .player-name').html(opponentName)
+                break;
+
+            case 'gameStart':
+                game.start();
+                break;
         }
 
         switch(message.command) {
@@ -37,7 +42,7 @@
                 var yourName = $('#player-name').val();
                 nameForm.trigger('closeModal');
                 game.players.you = yourName;
-                $('.player.you .player-name').html(yourName);
+                $('.you .player-name').html(yourName);
                 break;
 
             case 'getPlacements':
@@ -47,8 +52,11 @@
             case 'getOpponentName':
                 var opponentName = message.data;
                 game.players.opponent = opponentName;
-                $('.player.opponent .player-name').html(opponentName);
+                $('.opponent .player-name').html(opponentName);
                 break;
+
+            case 'finishPlacement':
+                game.finishPlacement();
         }
     };
 
