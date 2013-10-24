@@ -65,7 +65,12 @@ table td {
 }
 
 table td.used {
-    background-color: #369;
+    background: #BBCBE7 url(../images/pin.png) center center;
+    cursor: not-allowed;
+}
+
+table td.hit {
+
 }
 
 table td.ship.battleship {
@@ -87,11 +92,6 @@ table td.ship.destroyer {
 .player.opponent table td {
     border-color: #AA0000;
     color: #AA0000;
-}
-
-.player.opponent table td.used {
-    background-color: #AA0000;
-    cursor: not-allowed;
 }
 
 footer {
