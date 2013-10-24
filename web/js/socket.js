@@ -1,5 +1,5 @@
 (function() {
-    var socket = new WebSocket('ws://localhost:3000');
+    var socket = new WebSocket('ws://' + window.location.host);
 
     socket.sendJson = function(message) {
         socket.send(JSON.stringify(message));
@@ -29,7 +29,20 @@
             case 'opponentNameChanged':
                 var opponentName = message.data[0];
                 game.players.opponent = opponentName;
-                $('.player.opponent .player-name').html(opponentName)
+                $('.opponent .player-name').html(opponentName)
+                break;
+
+            case 'gameStart':
+                game.start();
+                break;
+
+            case 'activate':
+                game.setActivePlayer('you');
+                break;
+
+            case 'deactivate':
+                game.setActivePlayer('opponent');
+                break;
         }
 
         switch(message.command) {
@@ -37,19 +50,19 @@
                 var yourName = $('#player-name').val();
                 nameForm.trigger('closeModal');
                 game.players.you = yourName;
-                $('.player.you .player-name').html(yourName);
+                $('.you .player-name').html(yourName);
                 break;
 
             case 'getPlacements':
-                $('.place-ships').hide();
-                $('.player.you .interaction-blocked').hide();
                 game.setShips(message.data);
                 break;
-                
+
             case 'getOpponentName':
-                var opponentName = message.data;
-                game.players.opponent = opponentName;
-                $('.player.opponent .player-name').html(opponentName);
+                if (message.data) {
+                    var opponentName = message.data;
+                    game.players.opponent = opponentName;
+                    $('.opponent .player-name').html(opponentName);
+                }
                 break;
         }
     };

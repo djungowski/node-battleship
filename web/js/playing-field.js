@@ -4,6 +4,8 @@
     PlayingField.ORIENTATION_HORIZONTAL = 0;
     PlayingField.ORIENTATION_VERTICAL = 1;
 
+    PlayingField.prototype.currentlyMovingShip = false;
+
     PlayingField.prototype.renderField = function() {
         var me = this;
 
@@ -30,8 +32,30 @@
         return cols;
     };
 
+    // This needs an offset 1!
     PlayingField.prototype.getField = function(x, y) {
         return $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
+    };
+
+    PlayingField.prototype.canShipBePlaced = function(x, y, shipInfo) {
+        x = parseInt(x) + 1;
+        y = parseInt(y) + 1;
+
+        var field;
+
+        for (var i = 1; i <= shipInfo.ship.size; i++) {
+            field = this.getField(x, y);
+            if (field.hasClass('ship') && !field.hasClass(shipInfo.ship.type)) {
+                return false;
+            }
+
+            if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
+                x += 1;
+            } else {
+                y += 1;
+            }
+        }
+        return true;
     };
 
     PlayingField.prototype.setShips = function(ships) {
@@ -45,16 +69,12 @@
             var y = shipInfo.y + 1;
 
             me.placeShip(x, y, shipInfo);
-
-            // TODO: implement rotation
         });
     };
 
     PlayingField.prototype.placeShip = function(x, y, shipInfo) {
-        var shipClassName = 'ship ' + shipInfo.ship.type;
-
-        var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
         this.renderShip(x, y, shipInfo);
+        var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
         shipOnField.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
     };
 
@@ -69,8 +89,6 @@
         for (var i = 1; i <= shipInfo.ship.size; i++) {
             var shipPart = this.getField(x, y);
             shipPart.addClass(shipClassName);
-            // Todo: don't add click handler if currently moving ship
-            shipPart.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
             // Increase values for next ship field
             if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
                 x += 1;
@@ -81,8 +99,13 @@
     };
 
     PlayingField.prototype.moveShip = function(event) {
-        var shipInfo = event.data.shipInfo;
         var me = event.data.me;
+        if (me.currentlyMovingShip) {
+            return;
+        }
+        me.currentlyMovingShip = true;
+
+        var shipInfo = event.data.shipInfo;
         var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
 
         // Stop the event
@@ -91,30 +114,63 @@
         // First: remove click binding of ship
         shipOnField.unbind('click', this.moveShip);
         // Second: Add different click binding
-        $('.player.you table').bind('click', function(event) {
-            console.log(event.target);
-            var target = $(event.target);
-            var x = parseInt(target.attr('x'));
-            var y = parseInt(target.attr('y'));
-            if (x != undefined && y != undefined) {
-                me.placeShip((x + 1), (y + 1), shipInfo);
-
-                me.renderShip(x, y, shipInfo);
-                $('.player.you table').unbind('mouseover');
-                shipOnField.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
-            }
-        });
-
+        $('.player.you table td').bind('click', {shipInfo: shipInfo, me: me}, me.onshipplacement);
         // Last: mouseover binding for table
-        $('.player.you table').bind('mouseover', function(event) {
-            var target = $(event.target);
-            var x = parseInt(target.attr('x'));
-            var y = parseInt(target.attr('y'));
-            if (x != undefined && y != undefined) {
-                me.renderShip((x + 1), (y + 1), shipInfo);
-            }
-        });
+        $('.player.you table').bind('mouseover', {shipInfo: shipInfo, me: me}, me.whenmovingship);
     };
+
+    PlayingField.prototype.onshipplacement = function(event) {
+        var shipInfo = event.data.shipInfo;
+        var me = event.data.me;
+        var target = $(event.target);
+        var x = target.attr('x');
+        var y = target.attr('y');
+
+        if (!me.canShipBePlaced(x, y, shipInfo)) {
+            return;
+        }
+
+        if (x != undefined && y != undefined) {
+            x = parseInt(x);
+            y = parseInt(y);
+
+            if (x + shipInfo.ship.size > window.field.cols) {
+                x = window.field.cols - shipInfo.ship.size;
+            }
+            $('.player.you table').unbind('mouseover');
+            me.placeShip((x + 1), (y + 1), shipInfo);
+            $('.player.you table td').unbind('click', me.onshipplacement);
+            $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo, me: me}, this.moveShip);
+
+            me.currentlyMovingShip = false;
+
+            window.socket.sendJson({
+                command: 'place',
+                data: [shipInfo.ship.type, x, y, shipInfo.orientation]
+            });
+        }
+    };
+
+    PlayingField.prototype.whenmovingship = function(event) {
+        var shipInfo = event.data.shipInfo
+        var me = event.data.me;
+        var target = $(event.target);
+
+        var x = target.attr('x');
+        var y = target.attr('y');
+        var hasAxisInfo = (x != undefined && y != undefined);
+
+        x = parseInt(x);
+        y = parseInt(y);
+        var canShipBePlaced = me.canShipBePlaced(x, y, shipInfo);
+        // Ship must not leave the playing field
+        if (x + shipInfo.ship.size > window.field.cols) {
+            x = window.field.cols - shipInfo.ship.size;
+        }
+        if (hasAxisInfo && canShipBePlaced) {
+            me.renderShip((x + 1), (y + 1), shipInfo);
+        }
+    }
 
     window.playingField = new PlayingField();
 })()

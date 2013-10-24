@@ -50,7 +50,7 @@ table {
 }
 
 table td {
-    border: 1px solid #369;
+    background-color: #BBCBE7;
     text-align: center;
     height: 20px;
     color: #369;
@@ -118,7 +118,7 @@ footer p {
     border-radius: 10px;
 }
 
-.hide-on-start, .show-on-gamestart {
+.hide-on-start, .show-on-gamestart, .placement-done, .waiting-for-opponent {
     display: none;
 }
 
@@ -131,4 +131,10 @@ footer p {
     padding: 10px;
     border-radius: 5px;
     z-index: 2;
+}
+
+.active-player {
+    background-image: url(../images/gamepad.png);
+    background-repeat: no-repeat;
+    background-position: 10px -4px;
 }

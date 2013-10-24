@@ -36,32 +36,71 @@
         socket.sendJson({command:'getOpponentName'});
     };
 
+    Game.prototype.start = function() {
+        $('.waiting-for-opponent').hide();
+        $('.show-on-gamestart').show();
+        this.setState('playing');
+        // First off: Think that it's the opponents turn. Is changed by socket if different
+        this.setActivePlayer('opponent');
+    };
+
     Game.prototype.initPlaceShipsLinks = function() {
-        $('.place-ships-link').each(function(key, link) {
-            $(link).bind('click', function(event) {
-                event.preventDefault();
-                socket.sendJson({
-                    command: 'getPlacements'
-                });
+        var me = this;
+
+        $('.place-ships-link').bind('click', function(event) {
+            event.preventDefault();
+            socket.sendJson({
+                command: 'getPlacements'
             });
+            game.startPlacement();
         });
+
+        $('.placement-done-link').bind('click', function(event) {
+            event.preventDefault();
+            socket.sendJson({
+                command: 'finishPlacement'
+            });
+            me.finishPlacement();
+        });
+    };
+
+    Game.prototype.startPlacement = function() {
+        $('.place-ships').hide();
+        $('.player.you .interaction-blocked').hide();
+        $('.placement-done').show();
+    };
+
+    Game.prototype.finishPlacement = function() {
+        $('.placement-done').hide();
+        $('.player.you .interaction-blocked').show();
+        $('.waiting-for-opponent').show();
     };
 
     Game.prototype.setState = function(state) {
         this.state = state;
     };
 
+    Game.prototype.isState = function(state) {
+        return this.state == state;
+    };
+
     Game.prototype.setActivePlayer = function(player) {
         this.activePlayer = player;
 
-        var youBlock = $('.player.you .interaction-blocked');
-        var opponentBlock = $('.player.opponent .interaction-blocked');
+        var you = $('.player.you');
+        var opponent = $('.player.opponent');
 
         if (player == 'you') {
-            opponentBlock.hide();
+            opponent.find('.interaction-blocked').hide();
+            you.find('.player-name').addClass('active-player');
+            opponent.find('.player-name').removeClass('active-player');
+            $('.whose-turn-is-it').html(this.players.you);
         } else {
-            opponentBlock.show();
-            youBlock.show();
+            opponent.find('.interaction-blocked').show();
+            you.find('.interaction-blocked').show();
+            you.find('.player-name').removeClass('active-player');
+            opponent.find('.player-name').addClass('active-player');
+            $('.whose-turn-is-it').html(this.players.opponent);
         }
 
         $('#whose-turn-is-it').html(this.players[this.activePlayer].name);
