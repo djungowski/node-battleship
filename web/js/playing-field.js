@@ -4,7 +4,7 @@
     PlayingField.ORIENTATION_HORIZONTAL = 0;
     PlayingField.ORIENTATION_VERTICAL = 1;
 
-    PlayingField.prototype.currentlyMoving = false;
+    PlayingField.prototype.currentlyMovingShip = false;
 
     PlayingField.prototype.renderField = function() {
         var me = this;
@@ -53,8 +53,8 @@
     };
 
     PlayingField.prototype.placeShip = function(x, y, shipInfo) {
-        var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
         this.renderShip(x, y, shipInfo);
+        var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
         shipOnField.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
     };
 
@@ -69,8 +69,6 @@
         for (var i = 1; i <= shipInfo.ship.size; i++) {
             var shipPart = this.getField(x, y);
             shipPart.addClass(shipClassName);
-            // Todo: don't add click handler if currently moving ship
-            shipPart.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
             // Increase values for next ship field
             if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
                 x += 1;
@@ -82,10 +80,10 @@
 
     PlayingField.prototype.moveShip = function(event) {
         var me = event.data.me;
-        if (me.currentlyMoving) {
+        if (me.currentlyMovingShip) {
             return;
         }
-        me.currentlyMoving = true;
+        me.currentlyMovingShip = true;
 
         var shipInfo = event.data.shipInfo;
         var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
@@ -96,26 +94,38 @@
         // First: remove click binding of ship
         shipOnField.unbind('click', this.moveShip);
         // Second: Add different click binding
-        $('.player.you table').bind('click', function(event) {
-            var target = $(event.target);
-            if (target.hasClass('ship')) {
-                return;
-            }
-
-            var x = target.attr('x');
-            var y = target.attr('y');
-            if (x != undefined && y != undefined) {
-                x = parseInt(x);
-                y = parseInt(y);
-                me.placeShip((x + 1), (y + 1), shipInfo);
-                $('.player.you table').unbind('mouseover', {shipInfo: shipInfo, me: me}, me.whenmovingship);
-                $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo, me: me}, this.moveShip);
-                me.currentlyMoving = false;
-            }
-        });
+        $('.player.you table td').bind('click', {shipInfo: shipInfo, me: me}, me.onshipplacement);
 
         // Last: mouseover binding for table
         $('.player.you table').bind('mouseover', {shipInfo: shipInfo, me: me}, me.whenmovingship);
+    };
+
+    PlayingField.prototype.onshipplacement = function(event) {
+        var shipInfo = event.data.shipInfo;
+        var me = event.data.me;
+        var target = $(event.target);
+        var x = target.attr('x');
+        var y = target.attr('y');
+
+        if (target.hasClass('ship')) {
+            return;
+        }
+        console.log(target);
+
+        if (x != undefined && y != undefined) {
+            x = parseInt(x);
+            y = parseInt(y);
+
+            if (x + shipInfo.ship.size > window.field.cols) {
+                x = window.field.cols - shipInfo.ship.size;
+            }
+            $('.player.you table').unbind('mouseover');
+            me.placeShip((x + 1), (y + 1), shipInfo);
+            $('.player.you table td').unbind('click');
+            $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo, me: me}, this.moveShip);
+
+            me.currentlyMovingShip = false;
+        }
     };
 
     PlayingField.prototype.whenmovingship = function(event) {
