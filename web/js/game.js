@@ -166,7 +166,7 @@
         });
     };
 
-    Game.prototype.setFieldStatus = function(shootData) {
+    Game.prototype.setOpponentFieldStatus = function(shootData) {
         var hit = shootData.hit;
         // CSS needs an offset 1
         var x = parseInt(shootData.x) + 1;

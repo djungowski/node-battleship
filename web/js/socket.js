@@ -66,7 +66,7 @@
                 break;
 
             case 'shoot':
-                game.setFieldStatus(message.data);
+                game.setOpponentFieldStatus(message.data);
                 break;
         }
     };
