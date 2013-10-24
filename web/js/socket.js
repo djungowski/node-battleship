@@ -35,6 +35,14 @@
             case 'gameStart':
                 game.start();
                 break;
+
+            case 'activate':
+                game.setActivePlayer('you');
+                break;
+
+            case 'deactivate':
+                game.setActivePlayer('opponent');
+                break;
         }
 
         switch(message.command) {
