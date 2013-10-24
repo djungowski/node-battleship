@@ -37,19 +37,19 @@
                 var yourName = $('#player-name').val();
                 nameForm.trigger('closeModal');
                 game.players.you = yourName;
-                $('.player.you .player-name').html(yourName)
-
-                // Den Spielernamen vom Gegener auslesen, sobald der eigene gesetzt wurde
-                var message = {
-                    command: 'getOpponentName'
-                };
-                socket.sendJson(message);
+                $('.player.you .player-name').html(yourName);
                 break;
 
             case 'getPlacements':
                 $('.place-ships').hide();
                 $('.player.you .interaction-blocked').hide();
                 game.setShips(message.data);
+                break;
+                
+            case 'getOpponentName':
+                var opponentName = message.data;
+                game.players.opponent = opponentName;
+                $('.player.opponent .player-name').html(opponentName);
                 break;
         }
     };

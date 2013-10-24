@@ -33,6 +33,7 @@
         playingField.renderField();
         this.initPlayingField();
         this.initPlaceShipsLinks();
+        socket.sendJson({command:'getOpponentName'});
     };
 
     Game.prototype.initPlaceShipsLinks = function() {
