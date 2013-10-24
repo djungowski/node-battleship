@@ -52,8 +52,6 @@
 
     PlayingField.prototype.placeShip = function(x, y, shipInfo) {
         var shipClassName = 'ship ' + shipInfo.ship.type;
-        console.log(x);
-        console.log(y);
 
         // First: remove current ship
         $('.player.you table .ship.' + shipInfo.ship.type).removeClass(shipClassName);
