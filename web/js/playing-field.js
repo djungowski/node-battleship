@@ -36,6 +36,18 @@
         return $('.player.you table tr:nth-child(' + y + ') td:nth-child(' + x + ')');
     };
 
+    // TODO: implement orientation
+    PlayingField.prototype.hasRangeShip = function(x, y, range) {
+        var field;
+        for (var i; i <= range; i++) {
+            field = this.getField(x, y);
+            if (field.hasClass('ship')) {
+                return true;
+            }
+        }
+        return false;
+    };
+
     PlayingField.prototype.setShips = function(ships) {
         var me = this;
 
