@@ -7,6 +7,11 @@ a {
     color: #B1E939;
 }
 
+img {
+    position: relative;
+    top: 3px;
+}
+
 #content {
     overflow: hidden;
     height: 100%;
@@ -131,11 +136,6 @@ footer p {
     display: none;
 }
 
-.waiting-for-opponent img {
-    position: relative;
-    top: 3px;
-}
-
 .player .place-ships {
     position: absolute;
     top: 50px;
@@ -151,4 +151,12 @@ footer p {
     background-image: url(../images/gamepad.png);
     background-repeat: no-repeat;
     background-position: 10px -4px;
+}
+
+#enter-player-name {
+    padding-top: 5px;
+}
+
+#enter-player-name img {
+    top: 10px;
 }
