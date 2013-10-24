@@ -127,6 +127,11 @@ footer p {
     display: none;
 }
 
+.waiting-for-opponent img {
+    position: relative;
+    top: 3px;
+}
+
 .player .place-ships {
     position: absolute;
     top: 50px;
