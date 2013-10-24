@@ -48,11 +48,13 @@
             case 'getPlacements':
                 game.setShips(message.data);
                 break;
-                
+
             case 'getOpponentName':
-                var opponentName = message.data[0];
-                game.players.opponent = opponentName;
-                $('.opponent .player-name').html(opponentName);
+                if (message.data) {
+                    var opponentName = message.data;
+                    game.players.opponent = opponentName;
+                    $('.opponent .player-name').html(opponentName);
+                }
                 break;
         }
     };
