@@ -41,7 +41,7 @@
         $('.show-on-gamestart').show();
         this.setState('playing');
         // First off: Think that it's the opponents turn. Is changed by socket if different
-        $('.whose-turn-is-it').html(this.players.opponent);
+        this.setActivePlayer('opponent');
     };
 
     Game.prototype.initPlaceShipsLinks = function() {
@@ -92,9 +92,11 @@
 
         if (player == 'you') {
             opponentBlock.hide();
+            $('.whose-turn-is-it').html(this.players.you);
         } else {
             opponentBlock.show();
             youBlock.show();
+            $('.whose-turn-is-it').html(this.players.opponent);
         }
 
         $('#whose-turn-is-it').html(this.players[this.activePlayer].name);
