@@ -53,13 +53,23 @@
     PlayingField.prototype.placeShip = function(x, y, shipInfo) {
         var shipClassName = 'ship ' + shipInfo.ship.type;
 
+        var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
+        this.renderShip(x, y, shipInfo);
+        shipOnField.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
+    };
+
+    PlayingField.prototype.renderShip = function(x, y, shipInfo) {
+        var shipClassName = 'ship ' + shipInfo.ship.type;
+
         // First: remove current ship
-        $('.player.you table .ship.' + shipInfo.ship.type).removeClass(shipClassName);
+        var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
+        shipOnField.removeClass(shipClassName);
 
         // Do as long as there is ship
         for (var i = 1; i <= shipInfo.ship.size; i++) {
             var shipPart = this.getField(x, y);
             shipPart.addClass(shipClassName);
+            // Todo: don't add click handler if currently moving ship
             shipPart.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
             // Increase values for next ship field
             if (shipInfo.orientation == PlayingField.ORIENTATION_HORIZONTAL) {
@@ -73,16 +83,35 @@
     PlayingField.prototype.moveShip = function(event) {
         var shipInfo = event.data.shipInfo;
         var me = event.data.me;
+        var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
 
-        // First: remove click binding
-        $(event.target).unbind('click', this.moveShip);
-        // mouseover binding for table
-        $('.player.you table').bind('mouseover', function(event) {
+        // Stop the event
+        event.stopPropagation();
+
+        // First: remove click binding of ship
+        shipOnField.unbind('click', this.moveShip);
+        // Second: Add different click binding
+        $('.player.you table').bind('click', function(event) {
+            console.log(event.target);
             var target = $(event.target);
             var x = parseInt(target.attr('x'));
             var y = parseInt(target.attr('y'));
             if (x != undefined && y != undefined) {
                 me.placeShip((x + 1), (y + 1), shipInfo);
+
+                me.renderShip(x, y, shipInfo);
+                $('.player.you table').unbind('mouseover');
+                shipOnField.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
+            }
+        });
+
+        // Last: mouseover binding for table
+        $('.player.you table').bind('mouseover', function(event) {
+            var target = $(event.target);
+            var x = parseInt(target.attr('x'));
+            var y = parseInt(target.attr('y'));
+            if (x != undefined && y != undefined) {
+                me.renderShip((x + 1), (y + 1), shipInfo);
             }
         });
     };
