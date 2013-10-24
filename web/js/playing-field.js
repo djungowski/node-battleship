@@ -94,27 +94,34 @@
         $('.player.you table').bind('click', function(event) {
             console.log(event.target);
             var target = $(event.target);
-            var x = parseInt(target.attr('x'));
-            var y = parseInt(target.attr('y'));
+            var x = target.attr('x');
+            var y = target.attr('y');
             if (x != undefined && y != undefined) {
+                x = parseInt(x);
+                y = parseInt(y);
                 me.placeShip((x + 1), (y + 1), shipInfo);
-
-                me.renderShip(x, y, shipInfo);
-                $('.player.you table').unbind('mouseover');
-                shipOnField.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
+                $('.player.you table').unbind('mouseover', me.whenmovingship);
+                $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo, me: me}, this.moveShip);
             }
         });
 
         // Last: mouseover binding for table
-        $('.player.you table').bind('mouseover', function(event) {
-            var target = $(event.target);
-            var x = parseInt(target.attr('x'));
-            var y = parseInt(target.attr('y'));
-            if (x != undefined && y != undefined) {
-                me.renderShip((x + 1), (y + 1), shipInfo);
-            }
-        });
+        $('.player.you table').bind('mouseover', {shipInfo: shipInfo, me: me}, me.whenmovingship);
     };
+
+    PlayingField.prototype.whenmovingship = function(event) {
+        var shipInfo = event.data.shipInfo
+        var me = event.data.me;
+        var target = $(event.target);
+
+        var x = target.attr('x');
+        var y = target.attr('y');
+        if (x != undefined && y != undefined) {
+            x = parseInt(x);
+            y = parseInt(y);
+            me.renderShip((x + 1), (y + 1), shipInfo);
+        }
+    }
 
     window.playingField = new PlayingField();
 })()
