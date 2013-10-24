@@ -74,6 +74,10 @@
         $('.placement-done').hide();
         $('.player.you .interaction-blocked').show();
         $('.waiting-for-opponent').show();
+
+        // Remove all events on own field
+        $('.player.you table').unbind();
+        $('.player.you table td').unbind();
     };
 
     Game.prototype.setState = function(state) {
