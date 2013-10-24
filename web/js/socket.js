@@ -41,8 +41,6 @@
                 break;
 
             case 'getPlacements':
-                $('.place-ships').hide();
-                $('.player.you .interaction-blocked').hide();
                 game.setShips(message.data);
                 break;
                 

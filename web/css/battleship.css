@@ -132,3 +132,7 @@ footer p {
     border-radius: 5px;
     z-index: 2;
 }
+
+.placement-done {
+    display: none;
+}

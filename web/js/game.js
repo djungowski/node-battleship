@@ -37,14 +37,19 @@
     };
 
     Game.prototype.initPlaceShipsLinks = function() {
-        $('.place-ships-link').each(function(key, link) {
-            $(link).bind('click', function(event) {
-                event.preventDefault();
-                socket.sendJson({
-                    command: 'getPlacements'
-                });
+        $('.place-ships-link').bind('click', function(event) {
+            event.preventDefault();
+            socket.sendJson({
+                command: 'getPlacements'
             });
+            game.startPlacement();
         });
+    };
+
+    Game.prototype.startPlacement = function() {
+        $('.place-ships').hide();
+        $('.player.you .interaction-blocked').hide();
+        $('.placement-done').show();
     };
 
     Game.prototype.setState = function(state) {
