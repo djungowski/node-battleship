@@ -31,8 +31,6 @@ html, body {
     bottom: 0;
     left: 0;
     right: 0;
-    opacity: 0.1;
-    background-color: #000000;
     cursor: not-allowed;
 }
 
