@@ -1,5 +1,5 @@
 (function() {
-    var socket = new WebSocket('ws://localhost:3000');
+    var socket = new WebSocket('ws://' + window.location.host);
 
     socket.sendJson = function(message) {
         socket.send(JSON.stringify(message));
