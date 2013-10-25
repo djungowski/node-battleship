@@ -52,6 +52,11 @@
             case 'miss':
                 sounds.miss();
                 game.setFieldStatus('you', message.data[0]);
+                break;
+
+            case 'sinking':
+                sounds.sinking();
+                break;
         }
 
         switch(message.command) {

@@ -13,5 +13,12 @@
         $('#' + sound)[0].play();
     };
 
+    Sounds.prototype.sinking = function() {
+        // First: randomize the sinking sound
+        var number = Math.floor(Math.random() * 2) + 1
+        // Second: play!
+        this.play('sinking-' + number);
+    };
+
     window.sounds = new Sounds();
 })();
