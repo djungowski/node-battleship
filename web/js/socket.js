@@ -63,7 +63,7 @@
                 break;
 
             case 'lost':
-                sounds.lost();
+                sounds.lose();
                 game.end(message.event);
                 break;
                 break;

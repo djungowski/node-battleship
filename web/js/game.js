@@ -34,7 +34,11 @@
     };
 
     Game.prototype.end = function(playerStatus) {
-        
+        if (playerStatus == 'win') {
+            this.showMessage(true, 'Du hast gewonnen :)');
+        } else {
+            this.showMessage(true, 'Du hast verloren :(');
+        }
     };
 
     Game.prototype.serverFull = function() {
