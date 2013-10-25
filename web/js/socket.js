@@ -57,6 +57,17 @@
             case 'sinking':
                 sounds.sinking();
                 break;
+
+            case 'win':
+                sounds.win();
+                game.end(message.event);
+                break;
+
+            case 'lost':
+                sounds.lost();
+                game.end(message.event);
+                break;
+                break;
         }
 
         switch(message.command) {

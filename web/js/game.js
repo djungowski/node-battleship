@@ -5,14 +5,6 @@
     };
 
     /**
-     * Der aktuelle Spieler
-     * Kann sein: "you" oder "opponent"
-     *
-     * @type String
-     */
-    Game.prototype.activePlayer = null;
-
-    /**
      * Alle Spieler der Partie
      *
      * @type {{you: {id: null, name: null}, opponent: {id: null, name: null}}}
@@ -41,8 +33,12 @@
         this.setActivePlayer('opponent');
     };
 
+    Game.prototype.end = function(playerStatus) {
+
+    };
+
     Game.prototype.serverFull = function() {
-        $('#loading').html("Der Server ist voll.");
+        $('#message').html("Der Server ist voll.");
     };
 
     Game.prototype.initPlaceShipsLinks = function() {
@@ -82,7 +78,6 @@
     };
 
     Game.prototype.setActivePlayer = function(player) {
-        this.activePlayer = player;
 
         var you = $('.player.you');
         var opponent = $('.player.opponent');
@@ -100,7 +95,7 @@
             $('.whose-turn-is-it').html(this.players.opponent);
         }
 
-        $('#whose-turn-is-it').html(this.players[this.activePlayer].name);
+        $('#whose-turn-is-it').html(this.players[player].name);
     };
 
     Game.prototype.initNameForm = function() {
@@ -114,7 +109,6 @@
             }
         });
 
-        var me = this;
         nameForm.bind('submit', function(event) {
             event.preventDefault();
 
@@ -173,18 +167,21 @@
     };
 
     Game.prototype.initLoader = function() {
-        $('#loading').easyModal({
+        var messageDiv = $('#message');
+        messageDiv.easyModal({
             closeOnEscape: false,
             overlayClose: false
         });
+        messageDiv.html('Starte Schiffe versenken... <img src="images/ajax-loader.gif" />');
         this.setLoading(true);
     }
 
     Game.prototype.setLoading = function(loading) {
+        var messageDiv = $('#message');
         if (loading) {
-            $('#loading').trigger('openModal');
+            messageDiv.trigger('openModal');
         } else {
-            $('#loading').trigger('closeModal');
+            messageDiv.trigger('closeModal');
         }
     };
 
