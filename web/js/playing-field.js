@@ -80,7 +80,7 @@
     PlayingField.prototype.placeShip = function(x, y, shipInfo) {
         this.renderShip(x, y, shipInfo);
         var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
-        shipOnField.bind('click', {shipInfo: shipInfo, me: this}, this.moveShip);
+        shipOnField.bind('click', {shipInfo: shipInfo}, $.proxy(this.moveShip, this));
     };
 
     PlayingField.prototype.renderShip = function(x, y, shipInfo) {
@@ -104,11 +104,10 @@
     };
 
     PlayingField.prototype.moveShip = function(event) {
-        var me = event.data.me;
-        if (me.currentlyMovingShip) {
+        if (this.currentlyMovingShip) {
             return;
         }
-        me.currentlyMovingShip = true;
+        this.currentlyMovingShip = true;
 
         var shipInfo = event.data.shipInfo;
         var shipOnField = $('.player.you table .ship.' + shipInfo.ship.type);
@@ -119,9 +118,9 @@
         // First: remove click binding of ship
         shipOnField.unbind('click', this.moveShip);
         // Second: Add different click binding
-        $('.player.you table td').bind('click', {shipInfo: shipInfo, me: me}, me.onshipplacement);
+        $('.player.you table td').bind('click', {shipInfo: shipInfo, me: this}, this.onshipplacement);
         // Last: mouseover binding for table
-        $('.player.you table').bind('mouseover', {shipInfo: shipInfo, me: me}, me.whenmovingship);
+        $('.player.you table').bind('mouseover', {shipInfo: shipInfo, me: this}, this.whenmovingship);
     };
 
     PlayingField.prototype.onshipplacement = function(event) {
@@ -145,7 +144,7 @@
             $('.player.you table').unbind('mouseover');
             me.placeShip((x + 1), (y + 1), shipInfo);
             $('.player.you table td').unbind('click', me.onshipplacement);
-            $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo, me: me}, this.moveShip);
+            $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo}, this.moveShip);
 
             me.currentlyMovingShip = false;
 
