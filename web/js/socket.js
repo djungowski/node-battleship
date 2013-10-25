@@ -10,6 +10,7 @@
 
     socket.onclose = function(event) {
         game.showNameForm(false);
+        game.showMessage(true, 'Verbindung mit Server ist nicht möglich');
     };
 
     socket.onmessage = function(event) {
@@ -91,6 +92,11 @@
 
             case 'shoot':
                 game.setFieldStatus('opponent', message.data);
+                if (message.data.hit) {
+                    sounds.hit();
+                } else {
+                    sounds.miss();
+                }
                 break;
         }
     };
