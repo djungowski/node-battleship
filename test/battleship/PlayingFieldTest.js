@@ -27,5 +27,16 @@ describe('PlayingField', function(){
 				done();
 			});
 		});
+		
+		it ('does not produce ghostships on placement', function(){
+			var field = new PlayingField(20);
+			
+			process.nextTick(function(){
+				var originalCount = field.placements.length;
+				field.place('carrier', 10, 10, Ship.ORIENTATION_HORIZONTAL);
+				
+				assert(originalCount === field.placements.length);
+			});
+		});
 	});
 });
