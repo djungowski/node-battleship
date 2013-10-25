@@ -31,7 +31,7 @@ describe('PlayingField', function(){
 		it ('does not produce ghostships on placement', function(){
 			var field = new PlayingField(20);
 			
-			process.nextTick(function(){
+			field.on('loaded', function(){
 				var originalCount = field.placements.length;
 				field.place('carrier', 10, 10, Ship.ORIENTATION_HORIZONTAL);
 				
