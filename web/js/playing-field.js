@@ -143,7 +143,7 @@
             $('.player.you table').unbind('mouseover');
             this.placeShip((x + 1), (y + 1), shipInfo);
             $('.player.you table td').unbind('click', this.onshipplacement);
-            $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo}, this.moveShip);
+            $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo}, $.proxy(this.moveShip, this));
 
             this.currentlyMovingShip = false;
 
