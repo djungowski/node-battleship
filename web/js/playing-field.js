@@ -157,6 +157,10 @@
     };
 
     PlayingField.prototype.whenmovingship = function(event) {
+        // Only allow TD tags
+        if (event.target.tagName != 'TD') {
+            return;
+        }
         var shipInfo = event.data.shipInfo
         var me = event.data.me;
         var target = $(event.target);
