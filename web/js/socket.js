@@ -45,7 +45,12 @@
                 break;
 
             case 'hit':
+                sounds.hit();
+                game.setFieldStatus('you', message.data[0]);
+                break;
+
             case 'miss':
+                sounds.miss();
                 game.setFieldStatus('you', message.data[0]);
         }
 
