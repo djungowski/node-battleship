@@ -118,19 +118,18 @@
         // First: remove click binding of ship
         shipOnField.unbind('click', this.moveShip);
         // Second: Add different click binding
-        $('.player.you table td').bind('click', {shipInfo: shipInfo, me: this}, this.onshipplacement);
+        $('.player.you table td').bind('click', {shipInfo: shipInfo}, $.proxy(this.onshipplacement, this));
         // Last: mouseover binding for table
         $('.player.you table').bind('mouseover', {shipInfo: shipInfo, me: this}, this.whenmovingship);
     };
 
     PlayingField.prototype.onshipplacement = function(event) {
         var shipInfo = event.data.shipInfo;
-        var me = event.data.me;
         var target = $(event.target);
         var x = target.attr('x');
         var y = target.attr('y');
 
-        if (!me.canShipBePlaced(x, y, shipInfo)) {
+        if (!this.canShipBePlaced(x, y, shipInfo)) {
             return;
         }
 
@@ -142,11 +141,11 @@
                 x = window.field.cols - shipInfo.ship.size;
             }
             $('.player.you table').unbind('mouseover');
-            me.placeShip((x + 1), (y + 1), shipInfo);
-            $('.player.you table td').unbind('click', me.onshipplacement);
+            this.placeShip((x + 1), (y + 1), shipInfo);
+            $('.player.you table td').unbind('click', this.onshipplacement);
             $('.player.you table .ship.' + shipInfo.ship.type).bind('click', {shipInfo: shipInfo}, this.moveShip);
 
-            me.currentlyMovingShip = false;
+            this.currentlyMovingShip = false;
 
             window.socket.sendJson({
                 command: 'place',
