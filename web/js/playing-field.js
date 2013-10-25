@@ -120,7 +120,7 @@
         // Second: Add different click binding
         $('.player.you table td').bind('click', {shipInfo: shipInfo}, $.proxy(this.onshipplacement, this));
         // Last: mouseover binding for table
-        $('.player.you table').bind('mouseover', {shipInfo: shipInfo, me: this}, this.whenmovingship);
+        $('.player.you table').bind('mouseover', {shipInfo: shipInfo}, $.proxy(this.whenmovingship, this));
     };
 
     PlayingField.prototype.onshipplacement = function(event) {
@@ -160,7 +160,6 @@
             return;
         }
         var shipInfo = event.data.shipInfo
-        var me = event.data.me;
         var target = $(event.target);
 
         var x = target.attr('x');
@@ -169,13 +168,13 @@
 
         x = parseInt(x);
         y = parseInt(y);
-        var canShipBePlaced = me.canShipBePlaced(x, y, shipInfo);
+        var canShipBePlaced = this.canShipBePlaced(x, y, shipInfo);
         // Ship must not leave the playing field
         if (x + shipInfo.ship.size > window.field.cols) {
             x = window.field.cols - shipInfo.ship.size;
         }
         if (hasAxisInfo && canShipBePlaced) {
-            me.renderShip((x + 1), (y + 1), shipInfo);
+            this.renderShip((x + 1), (y + 1), shipInfo);
         }
     };
 
