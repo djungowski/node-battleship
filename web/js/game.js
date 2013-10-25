@@ -18,7 +18,7 @@
 
     Game.prototype.init = function() {
         $('.hide-on-start').show();
-        this.setLoading(false);
+        this.showMessage(false);
         this.showNameForm(true);
         playingField.renderField();
         this.initPlayingField();
@@ -34,7 +34,7 @@
     };
 
     Game.prototype.end = function(playerStatus) {
-
+        
     };
 
     Game.prototype.serverFull = function() {
@@ -172,13 +172,19 @@
             closeOnEscape: false,
             overlayClose: false
         });
-        messageDiv.html('Starte Schiffe versenken... <img src="images/ajax-loader.gif" />');
-        this.setLoading(true);
-    }
+        this.showMessage(true);
+    };
 
     Game.prototype.setLoading = function(loading) {
+        this.showMessage(loading, 'Starte Schiffe versenken... <img src="images/ajax-loader.gif" />');
+    };
+
+    Game.prototype.showMessage = function(show, message) {
         var messageDiv = $('#message');
-        if (loading) {
+        if (message) {
+            messageDiv.html(message);
+        }
+        if (show) {
             messageDiv.trigger('openModal');
         } else {
             messageDiv.trigger('closeModal');
