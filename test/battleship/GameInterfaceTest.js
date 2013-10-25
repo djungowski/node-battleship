@@ -18,6 +18,12 @@ describe('GameInterface', function(){
 			var i = new GameInterface(null, {on:function(){}});
 			assert.throws(i.shoot);
 		});
+		
+		it ('should fail if the game is over', function(){
+			var i = new GameInterface(null, {on:function(){}});
+			i.emit('win');
+			assert.throws(i.shoot);
+		});
 	});
 	
 	it ('should emit an event when the opponent name is changed', function(done){
