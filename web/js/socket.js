@@ -19,7 +19,7 @@
 
         switch(message.event) {
             case 'full':
-                $('#loading').html("Der Server ist voll.");
+                game.serverFull();
                 break;
 
             case 'connected':

@@ -4,8 +4,6 @@
         this.initNameForm();
     };
 
-    Game.prototype.state = 'preparation';
-
     /**
      * Der aktuelle Spieler
      * Kann sein: "you" oder "opponent"
@@ -39,9 +37,12 @@
     Game.prototype.start = function() {
         $('.waiting-for-opponent').hide();
         $('.show-on-gamestart').show();
-        this.setState('playing');
         // First off: Think that it's the opponents turn. Is changed by socket if different
         this.setActivePlayer('opponent');
+    };
+
+    Game.prototype.serverFull = function() {
+        $('#loading').html("Der Server ist voll.");
     };
 
     Game.prototype.initPlaceShipsLinks = function() {
@@ -78,14 +79,6 @@
         // Remove all events on own field
         $('.player.you table').unbind();
         $('.player.you table td').unbind();
-    };
-
-    Game.prototype.setState = function(state) {
-        this.state = state;
-    };
-
-    Game.prototype.isState = function(state) {
-        return this.state == state;
     };
 
     Game.prototype.setActivePlayer = function(player) {
