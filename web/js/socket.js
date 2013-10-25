@@ -45,6 +45,7 @@
                 break;
 
             case 'hit':
+            case 'miss':
                 game.setFieldStatus('you', message.data[0]);
         }
 

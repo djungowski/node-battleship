@@ -51,7 +51,7 @@ wsServer.on('request', function(req) {
 	});
 	
 	// relay all important events to the client
-	['activate', 'deactivate', 'opponentNameChanged', 'hit', 'sinking'].forEach(function(event){
+	['activate', 'deactivate', 'opponentNameChanged', 'hit', 'miss', 'sinking'].forEach(function(event){
 		iface.on(event, function(){
 			conn.sendUTF(JSON.stringify({event:event, data:arguments}));
 		});
