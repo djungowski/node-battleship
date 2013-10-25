@@ -10,7 +10,10 @@
     };
 
     Sounds.prototype.play = function(sound) {
-        $('#' + sound)[0].play();
+        var soundElement = $('#' + sound)[0];
+        soundElement.pause();
+        soundElement.currentTime = 0;
+        soundElement.play();
     };
 
     Sounds.prototype.sinking = function() {
