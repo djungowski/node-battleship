@@ -1,10 +1,16 @@
 var Game = require('../../lib/battleship/Game');
 
 describe("Game", function(){
-	it ("should emit an event when both players finish their placement", function(done){
+	it ("should emit an event on both interfaces when both players finish their placement", function(done){
 		var game = new Game();
-		game.on("gameStart", done);
-		for (var i = 0; i < 2; i++) game.getNextInterface().finishPlacement();
+		var events = 0;
+		for (var i = 0; i < 2; i++) {
+			var iface = game.getNextInterface();
+			iface.on('gameStart', function(){
+				if (++events == 2) done();
+			});
+			iface.finishPlacement();
+		}
 	});
 
 	it ("should activate exactly one interface on game start", function(done) {
