@@ -141,19 +141,16 @@ Game.prototype.initPlayingField = function() {
     $('.interaction-blocked').show();
 
     // Klick auf das rechte Spielfeld
-    opponent.find('table').bind('click', function(event) {
+    opponent.find('table').bind('click', $.proxy(function(event) {
         field = $(event.target);
         if (!field.hasClass('used')) {
             // Beispiel: x und y auslesen
             var x = parseInt(field.attr('x'));
             var y = parseInt(field.attr('y'));
 
-            window.socket.sendJson({
-                command: 'shoot',
-                data: [x, y]
-            });
+            this.gameInterface.shoot(x, y);
         }
-    });
+    }, this));
 };
 
 Game.prototype.setFieldStatus = function(player, shootData) {

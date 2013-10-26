@@ -28,6 +28,13 @@
         });
     };
 
+    GameInterface.prototype.shoot = function(x, y) {
+        this.socket.sendJson({
+            command: 'shoot',
+            data: [x, y]
+        });
+    };
+
     var iface = new GameInterface(window.socket);
     window.game = new Game(iface);
 })();
