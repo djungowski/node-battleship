@@ -1,6 +1,6 @@
 (function() {
     /**
-     * Das GameInterface reagiert auf bestimmte Aktionen aus dem Spiel
+     * The GameInterface reacts on certain actions of the game
      * @param socket
      * @constructor
      */
@@ -9,21 +9,22 @@
     };
 
     /**
-     * Websocket Verbindung zum Server
+     * WebSocket connection to the server
      *
      * @type WebSocket
      */
     GameInterface.prototype.socket = null;
 
     /**
-     * Wird aufgerufen, wenn das Spiel an sich initialisiert wird
+     * This method is called as soon as the game is initialized
+     *
      */
     GameInterface.prototype.initGame = function() {
         this.socket.sendJson({command:'getOpponentName'});
     };
 
     /**
-     * Wird aufgerufen, wenn der eigene Spielername gesetzt wird
+     * This method is called after the own player name was set
      *
      * @param name
      */
@@ -35,7 +36,7 @@
     };
 
     /**
-     * Wird aufgerufen, wenn der Benutzer anfaengt seine Schiffe zu positionieren
+     * This method is called when the user starts placing his/her ships
      *
      */
     GameInterface.prototype.startPlacement = function() {
@@ -45,7 +46,7 @@
     };
 
     /**
-     * Wird aufgerufen, wenn der Benutzer ein Schiff platziert
+     * This method is called when placing a ship
      *
      * @param shipType
      * @param x
@@ -60,7 +61,7 @@
     };
 
     /**
-     * Wird aufgerufen, wenn der Benutzer fertig ist seine Schiffe zu positionieren
+     * This method is called when the user has completed placing his/her ships
      *
      */
     GameInterface.prototype.finishPlacement = function() {
@@ -70,7 +71,7 @@
     };
 
     /**
-     * Wird aufgerufen, wenn der Benutzer einen Schuss abgibt
+     * This method is called when shooting
      *
      * @param x
      * @param y
