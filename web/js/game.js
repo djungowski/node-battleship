@@ -22,7 +22,7 @@ Game.prototype.isServerFull = false;
 
 Game.prototype.init = function() {
     $('.hide-on-start').show();
-    this.showMessage(false);
+    this.hideMessage();
     this.showNameForm(true);
     playingField.renderField();
     this.initPlayingField();
@@ -39,14 +39,14 @@ Game.prototype.start = function() {
 
 Game.prototype.end = function(playerStatus) {
     if (playerStatus == 'win') {
-        this.showMessage(true, 'Du hast gewonnen :)');
+        this.showMessage('Du hast gewonnen :)');
     } else {
-        this.showMessage(true, 'Du hast verloren :(');
+        this.showMessage('Du hast verloren :(');
     }
 };
 
 Game.prototype.serverFull = function() {
-    this.showMessage(true, "Der Server ist voll");
+    this.showMessage("Der Server ist voll");
     this.isServerFull = true;
 };
 
@@ -175,14 +175,18 @@ Game.prototype.initLoader = function() {
         closeOnEscape: false,
         overlayClose: false
     });
-    this.showMessage(true);
+    this.showMessage();
 };
 
 Game.prototype.setLoading = function(loading) {
-    this.showMessage(loading, 'Starte Schiffe versenken... <img src="images/ajax-loader.gif" />');
+    if (loading) {
+        this.showMessage('Starte Schiffe versenken... <img src="images/ajax-loader.gif" />');
+    } else {
+        this.hideMessage();
+    }
 };
 
-Game.prototype.showMessage = function(show, message) {
+Game.prototype.showMessage = function(message) {
     // Don't do anything more if the server is already full
     if (this.isServerFull) {
         return;
@@ -192,11 +196,11 @@ Game.prototype.showMessage = function(show, message) {
     if (message) {
         messageDiv.html(message);
     }
-    if (show) {
-        messageDiv.trigger('openModal');
-    } else {
-        messageDiv.trigger('closeModal');
-    }
+    messageDiv.trigger('openModal');
+};
+
+Game.prototype.hideMessage = function() {
+    $('#message').trigger('closeModal');
 };
 
 Game.prototype.setShips = function(ships) {
