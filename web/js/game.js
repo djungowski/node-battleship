@@ -50,9 +50,7 @@ Game.prototype.serverFull = function() {
 Game.prototype.initPlaceShipsLinks = function() {
     $('.place-ships-link').bind('click', $.proxy(function(event) {
         event.preventDefault();
-        socket.sendJson({
-            command: 'getPlacements'
-        });
+        this.gameInterface.getPlacements();
         game.startPlacement();
     }, this));
 

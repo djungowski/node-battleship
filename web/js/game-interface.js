@@ -9,6 +9,12 @@
         this.socket.sendJson({command:'getOpponentName'});
     };
 
+    GameInterface.prototype.getPlacements = function() {
+        this.socket.sendJson({
+            command: 'getPlacements'
+        });
+    };
+
     var iface = new GameInterface(window.socket);
     window.game = new Game(iface);
 })();
