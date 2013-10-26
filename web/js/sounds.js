@@ -1,6 +1,6 @@
 (function() {
     var Sounds = function() {
-        this.availableSounds = ['lose', 'win', 'hit', 'miss'];
+        this.availableSounds = ['lose', 'win', 'hit', 'miss', 'activate'];
 
         this.availableSounds.forEach(function(sound) {
             this[sound] = function() {

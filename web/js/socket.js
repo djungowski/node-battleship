@@ -37,6 +37,7 @@
                 break;
 
             case 'activate':
+                sounds.activate();
                 game.setActivePlayer('you');
                 break;
 
@@ -50,7 +51,6 @@
                 break;
 
             case 'miss':
-                sounds.miss();
                 game.setFieldStatus('you', message.data[0]);
                 break;
 
