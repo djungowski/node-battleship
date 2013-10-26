@@ -58,7 +58,7 @@
                 game.end(message.event);
                 break;
 
-            case 'lost':
+            case 'lose':
                 sounds.lose();
                 game.end(message.event);
                 break;
