@@ -48,23 +48,21 @@ Game.prototype.serverFull = function() {
 };
 
 Game.prototype.initPlaceShipsLinks = function() {
-    var me = this;
-
-    $('.place-ships-link').bind('click', function(event) {
+    $('.place-ships-link').bind('click', $.proxy(function(event) {
         event.preventDefault();
         socket.sendJson({
             command: 'getPlacements'
         });
         game.startPlacement();
-    });
+    }, this));
 
-    $('.placement-done-link').bind('click', function(event) {
+    $('.placement-done-link').bind('click', $.proxy(function(event) {
         event.preventDefault();
         socket.sendJson({
             command: 'finishPlacement'
         });
-        me.finishPlacement();
-    });
+        this.finishPlacement();
+    }, this));
 };
 
 Game.prototype.startPlacement = function() {
