@@ -24,7 +24,7 @@
 
             case 'opponentNameChanged':
                 var opponentName = message.data[0];
-                game.setPlayerName('opponent', opponentName)
+                game.setPlayerName('opponent', opponentName);
                 break;
 
             case 'gameStart':
@@ -61,7 +61,6 @@
             case 'lost':
                 sounds.lose();
                 game.end(message.event);
-                break;
                 break;
         }
 
