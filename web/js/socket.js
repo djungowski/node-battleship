@@ -9,7 +9,6 @@
     };
 
     socket.onclose = function(event) {
-        game.showNameForm(false);
         game.showMessage(true, 'Verbindung mit Server ist nicht möglich');
     };
 
@@ -28,8 +27,7 @@
 
             case 'opponentNameChanged':
                 var opponentName = message.data[0];
-                game.players.opponent = opponentName;
-                $('.opponent .player-name').html(opponentName)
+                game.setPlayerName('opponent', opponentName)
                 break;
 
             case 'gameStart':
@@ -73,9 +71,7 @@
         switch(message.command) {
             case 'setPlayerName':
                 var yourName = $('#player-name').val();
-                nameForm.trigger('closeModal');
-                game.players.you = yourName;
-                $('.you .player-name').html(yourName);
+                game.setPlayerName('you', yourName);
                 break;
 
             case 'getPlacements':
@@ -85,8 +81,7 @@
             case 'getOpponentName':
                 if (message.data) {
                     var opponentName = message.data;
-                    game.players.opponent = opponentName;
-                    $('.opponent .player-name').html(opponentName);
+                    game.setPlayerName('opponent', opponentName)
                 }
                 break;
 

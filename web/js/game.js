@@ -81,8 +81,15 @@
         $('.player.you table td').unbind();
     };
 
-    Game.prototype.setActivePlayer = function(player) {
+    Game.prototype.setPlayerName = function(player, name) {
+        this.players[player] = name;
+        $('.' + player + ' .player-name').html(name);
+        if (player == 'you') {
+            this.showNameForm(false);
+        }
+    };
 
+    Game.prototype.setActivePlayer = function(player) {
         var you = $('.player.you');
         var opponent = $('.player.opponent');
 
@@ -184,6 +191,7 @@
     };
 
     Game.prototype.showMessage = function(show, message) {
+        this.showNameForm(false);
         var messageDiv = $('#message');
         if (message) {
             messageDiv.html(message);
