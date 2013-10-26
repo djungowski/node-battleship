@@ -1,5 +1,5 @@
 (function() {
-    var socket = new WebSocket('ws://' + window.location.host);
+    window.socket = new WebSocket('ws://' + window.location.host);
 
     socket.sendJson = function(message) {
         socket.send(JSON.stringify(message));
@@ -95,6 +95,4 @@
                 break;
         }
     };
-
-    window.socket = socket;
 })();
