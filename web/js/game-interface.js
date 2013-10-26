@@ -44,6 +44,14 @@
         });
     };
 
+    /**
+     * Wird aufgerufen, wenn der Benutzer ein Schiff platziert
+     *
+     * @param shipType
+     * @param x
+     * @param y
+     * @param orientation
+     */
     GameInterface.prototype.placeShip = function(shipType, x, y, orientation) {
         this.socket.sendJson({
             command: 'place',
