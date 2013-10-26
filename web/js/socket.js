@@ -6,7 +6,7 @@
     };
 
     socket.onclose = function() {
-        game.showMessage('Verbindung mit Server wurde unterbrochen.');
+        game.noConnection();
     };
 
     socket.onmessage = function(event) {

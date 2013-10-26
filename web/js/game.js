@@ -207,3 +207,7 @@ Game.prototype.setShips = function(ships) {
     this.ships = ships;
     playingField.setShips(ships);
 };
+
+Game.prototype.noConnection = function() {
+    this.showMessage('Verbindung mit Server wurde unterbrochen.');
+};
