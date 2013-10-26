@@ -5,11 +5,8 @@
         socket.send(JSON.stringify(message));
     };
 
-    socket.onopen = function(event) {
-    };
-
-    socket.onclose = function(event) {
-        game.showMessage(true, 'Verbindung mit Server ist nicht möglich');
+    socket.onclose = function() {
+        game.showMessage(true, 'Verbindung mit Server wurde unterbrochen.');
     };
 
     socket.onmessage = function(event) {

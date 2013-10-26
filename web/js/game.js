@@ -18,6 +18,8 @@ Game.prototype.players = {
 
 Game.prototype.ships = [];
 
+Game.prototype.isServerFull = false;
+
 Game.prototype.init = function() {
     $('.hide-on-start').show();
     this.showMessage(false);
@@ -44,7 +46,8 @@ Game.prototype.end = function(playerStatus) {
 };
 
 Game.prototype.serverFull = function() {
-    $('#message').html("Der Server ist voll.");
+    this.showMessage(true, "Der Server ist voll");
+    this.isServerFull = true;
 };
 
 Game.prototype.initPlaceShipsLinks = function() {
@@ -180,6 +183,10 @@ Game.prototype.setLoading = function(loading) {
 };
 
 Game.prototype.showMessage = function(show, message) {
+    // Don't do anything more if the server is already full
+    if (this.isServerFull) {
+        return;
+    }
     this.showNameForm(false);
     var messageDiv = $('#message');
     if (message) {
