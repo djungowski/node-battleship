@@ -56,9 +56,7 @@ Game.prototype.initPlaceShipsLinks = function() {
 
     $('.placement-done-link').bind('click', $.proxy(function(event) {
         event.preventDefault();
-        socket.sendJson({
-            command: 'finishPlacement'
-        });
+        this.gameInterface.finishPlacement();
         this.finishPlacement();
     }, this));
 };

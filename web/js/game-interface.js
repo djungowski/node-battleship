@@ -15,6 +15,12 @@
         });
     };
 
+    GameInterface.prototype.finishPlacement = function() {
+        this.socket.sendJson({
+            command: 'finishPlacement'
+        });
+    };
+
     var iface = new GameInterface(window.socket);
     window.game = new Game(iface);
 })();
