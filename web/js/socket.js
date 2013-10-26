@@ -11,7 +11,6 @@
 
     socket.onmessage = function(event) {
         var message = JSON.parse(event.data);
-        console.log(message);
 
         switch(message.event) {
             case 'full':
