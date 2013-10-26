@@ -1,6 +1,6 @@
 (function() {
     var Sounds = function() {
-        this.availableSounds = ['lose', 'win', 'hit', 'miss', 'activate'];
+        this.availableSounds = ['lose', 'win', 'hit', 'activate'];
 
         this.availableSounds.forEach(function(sound) {
             this[sound] = function() {
@@ -16,11 +16,19 @@
         soundElement.play();
     };
 
-    Sounds.prototype.sinking = function() {
-        // First: randomize the sinking sound
-        var number = Math.floor(Math.random() * 2) + 1
+    Sounds.prototype.playRandomSound = function(sound, numberOfSounds) {
+        // First: randomize the sound
+        var number = Math.floor(Math.random() * numberOfSounds) + 1
         // Second: play!
-        this.play('sinking-' + number);
+        this.play(sound + '-' + number);
+    };
+
+    Sounds.prototype.miss = function() {
+        this.playRandomSound('miss', 7);
+    };
+
+    Sounds.prototype.sinking = function() {
+        this.playRandomSound('sinking', 2);
     };
 
     window.sounds = new Sounds();
