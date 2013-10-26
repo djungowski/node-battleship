@@ -38,7 +38,7 @@ describe('GameInterface', function(){
 		op.setName("some name");
 	});
 	
-	it ('should emit a "lost" event when all ships have been destroyed', function(done){
+	it ('should emit a "lose" event when all ships have been destroyed', function(done){
 		var field = new PlayingField(20),
 			iFace = new GameInterface(null, field);
 		
@@ -53,7 +53,7 @@ describe('GameInterface', function(){
 			}
 		});
 		
-		iFace.on('lost', function(){
+		iFace.on('lose', function(){
 			gameOver = true;
 			done();
 		});
