@@ -116,16 +116,12 @@ Game.prototype.initNameForm = function() {
         }
     });
 
-    nameForm.bind('submit', function(event) {
+    nameForm.bind('submit', $.proxy(function(event) {
         event.preventDefault();
 
         var yourName = $('#player-name').val();
-        var message = {
-            command: 'setPlayerName',
-            data: [yourName]
-        };
-        socket.sendJson(message);
-    });
+        this.gameInterface.setPlayerName(yourName);
+    }, this));
 };
 
 Game.prototype.showNameForm = function(show) {

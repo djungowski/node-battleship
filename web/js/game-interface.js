@@ -21,6 +21,13 @@
         });
     };
 
+    GameInterface.prototype.setPlayerName = function(name) {
+        socket.sendJson({
+            command: 'setPlayerName',
+            data: [name]
+        });
+    };
+
     var iface = new GameInterface(window.socket);
     window.game = new Game(iface);
 })();
