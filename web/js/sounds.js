@@ -1,10 +1,20 @@
 (function() {
     var Sounds = function() {
         this.availableSounds = ['lose', 'win', 'hit', 'activate'];
+        this.randomizedSounds = [
+            { name: 'miss', numberOfSounds: 7 },
+            { name: 'sinking', numberOfSounds: 2 }
+        ];
 
         this.availableSounds.forEach(function(sound) {
             this[sound] = function() {
                 this.play(sound);
+            };
+        }, this);
+
+        this.randomizedSounds.forEach(function(sound) {
+            this[sound.name] = function() {
+                this.playRandomized(sound.name, sound.numberOfSounds)
             };
         }, this);
     };
@@ -16,19 +26,11 @@
         soundElement.play();
     };
 
-    Sounds.prototype.playRandomSound = function(sound, numberOfSounds) {
+    Sounds.prototype.playRandomized = function(sound, numberOfSounds) {
         // First: randomize the sound
         var number = Math.floor(Math.random() * numberOfSounds) + 1
         // Second: play!
         this.play(sound + '-' + number);
-    };
-
-    Sounds.prototype.miss = function() {
-        this.playRandomSound('miss', 7);
-    };
-
-    Sounds.prototype.sinking = function() {
-        this.playRandomSound('sinking', 2);
     };
 
     window.sounds = new Sounds();
