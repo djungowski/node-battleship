@@ -46,12 +46,8 @@ wsServer.on('request', function(req) {
 		}
 	});
 	
-	game.on('gameStart', function(){
-		conn.sendUTF(JSON.stringify({event:"gameStart"}));
-	});
-	
 	// relay all important events to the client
-	['activate', 'deactivate', 'opponentNameChanged', 'hit', 'miss', 'sinking', 'win', 'lost'].forEach(function(event){
+	['activate', 'deactivate', 'opponentNameChanged', 'hit', 'miss', 'sinking', 'win', 'lost', 'gameStart'].forEach(function(event){
 		iface.on(event, function(){
 			conn.sendUTF(JSON.stringify({event:event, data:arguments}));
 		});
