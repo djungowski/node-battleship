@@ -19,6 +19,7 @@
      * Wird aufgerufen, wenn das Spiel an sich initialisiert wird
      */
     GameInterface.prototype.initGame = function() {
+        this.socket.sendJson({command:'getOpponentName'});
     };
 
     /**
@@ -27,6 +28,10 @@
      * @param name
      */
     GameInterface.prototype.setPlayerName = function(name) {
+        socket.sendJson({
+            command: 'setPlayerName',
+            data: [name]
+        });
     };
 
     /**
@@ -34,6 +39,9 @@
      *
      */
     GameInterface.prototype.startPlacement = function() {
+        this.socket.sendJson({
+            command: 'getPlacements'
+        });
     };
 
     /**
@@ -45,6 +53,10 @@
      * @param orientation
      */
     GameInterface.prototype.placeShip = function(shipType, x, y, orientation) {
+        this.socket.sendJson({
+            command: 'place',
+            data: [shipType, x, y, orientation]
+        });
     };
 
     /**
@@ -52,6 +64,9 @@
      *
      */
     GameInterface.prototype.finishPlacement = function() {
+        this.socket.sendJson({
+            command: 'finishPlacement'
+        });
     };
 
     /**
@@ -61,9 +76,14 @@
      * @param y
      */
     GameInterface.prototype.shoot = function(x, y) {
+        this.socket.sendJson({
+            command: 'shoot',
+            data: [x, y]
+        });
     };
 
     var iface = new GameInterface(window.socket);
+
     window.playingField = new PlayingField(iface);
     window.game = new Game(iface);
 })();
