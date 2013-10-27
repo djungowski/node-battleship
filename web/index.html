@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Schiffe versenken</title>
+    <title>Battleship</title>
     <link rel="stylesheet" type="text/css" href="css/battleship.css">
     <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -18,7 +18,7 @@
 
 <form id="enter-player-name" class="modal-window">
     <img src="images/user.png" alt="" class="large" />
-    <label for="player-name">Dein Name:</label>
+    <label for="player-name">Your Name:</label>
     <input type="text" name="player-name" id="player-name">
 </form>
 
@@ -28,15 +28,15 @@
         <div class="field">
             <div class="hide-on-start place-ships modal-window">
                 <img src="images/map.png" alt="" class="large" />
-                Bist du bereit?
-                <a href="#" class="place-ships-link">Jetzt Schiffe platzieren</a>
+                Are you ready?
+                <a href="#" class="place-ships-link">Place ships now</a>
             </div>
             <div class="interaction-blocked"></div>
             <table></table>
         </div>
     </div>
     <div class="player opponent">
-        <p class="player-name">Gegenspieler</p>
+        <p class="player-name">Opponent</p>
         <div class="field">
             <div class="interaction-blocked"></div>
             <table></table>
@@ -47,21 +47,20 @@
 <footer class="hide-on-start">
     <p class="hide-on-start place-ships">
         <img src="images/map.png" alt="" class="large" />
-        Bist du bereit?
-        <a href="#" class="place-ships-link">Jetzt Schiffe platzieren</a>
+        Are you ready?
+        <a href="#" class="place-ships-link">Place ships now</a>
     </p>
     <p class="placement-done">
         <img src="images/map.png" alt="" class="large" />
-        Alle Schiffe platziert?
-        <a href="#" class="placement-done-link">Platzierung beenden</a>
+        All ships in place?
+        <a href="#" class="placement-done-link">Finish placement</a>
     </p>
     <p class="waiting-for-opponent opponent">
         <img src="images/radar.gif" alt="" />
-        Warte auf <span class="player-name">Gegenspieler</span>...
+        Waiting for <span class="player-name">opponent</span>...
     </p>
     <p class="show-on-gamestart">
-        An der Reihe:
-        <span class="whose-turn-is-it"></span>
+        <span class="whose-turn-is-it"></span>'s turn
     </p>
 </footer>
 
