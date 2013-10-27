@@ -39,14 +39,14 @@ Game.prototype.start = function() {
 
 Game.prototype.end = function(playerStatus) {
     if (playerStatus == 'win') {
-        this.showMessage('Du hast gewonnen :)');
+        this.showMessage('You won :)');
     } else {
-        this.showMessage('Du hast verloren :(');
+        this.showMessage('You lost :(');
     }
 };
 
 Game.prototype.serverFull = function() {
-    this.showMessage("Der Server ist voll");
+    this.showMessage("The server is full");
     this.isServerFull = true;
 };
 
@@ -180,7 +180,7 @@ Game.prototype.initLoader = function() {
 
 Game.prototype.setLoading = function(loading) {
     if (loading) {
-        this.showMessage('Starte Schiffe versenken... <img src="images/ajax-loader.gif" />');
+        this.showMessage('Starting battleship... <img src="images/ajax-loader.gif" />');
     } else {
         this.hideMessage();
     }
@@ -209,5 +209,5 @@ Game.prototype.setShips = function(ships) {
 };
 
 Game.prototype.noConnection = function() {
-    this.showMessage('Verbindung mit Server wurde unterbrochen.');
+    this.showMessage('Lost connection to the server.');
 };
